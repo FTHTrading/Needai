@@ -95,27 +95,39 @@ async function getAIResponse(speechResult: string, persona: string, conversation
     { role: 'user', content: speechResult },
   ];
 
-  const res = await fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${OPENAI_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      model: 'gpt-4o-mini',
-      messages,
-      max_tokens: 120,
-      temperature: 0.6,
-    }),
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 4000);
 
-  if (!res.ok) {
-    console.error('[Gather] OpenAI error:', res.status, await res.text());
-    return "I didn't quite catch that. Could you repeat what you need help with?";
+  try {
+    const res = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      signal: controller.signal,
+      headers: {
+        'Authorization': `Bearer ${OPENAI_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'gpt-4o-mini',
+        messages,
+        max_tokens: 60,
+        temperature: 0.4,
+      }),
+    });
+    clearTimeout(timeout);
+
+    if (!res.ok) {
+      console.error('[Gather] OpenAI error:', res.status, await res.text());
+      return "I didn't quite catch that. Could you repeat what you need help with?";
+    }
+
+    const json = await res.json();
+    return json.choices?.[0]?.message?.content?.trim() ?? "Could you say that again? I want to make sure I get this right for you.";
+  } catch (err: unknown) {
+    clearTimeout(timeout);
+    const isAbort = err instanceof Error && err.name === 'AbortError';
+    console.error('[Gather] OpenAI fetch error:', isAbort ? 'timeout' : err);
+    return "One moment — could you share your name and best callback number so we can follow up with you directly?";
   }
-
-  const json = await res.json();
-  return json.choices?.[0]?.message?.content?.trim() ?? "Could you say that again? I want to make sure I get this right for you.";
 }
 
 export async function POST(request: NextRequest) {

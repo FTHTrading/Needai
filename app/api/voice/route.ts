@@ -25,9 +25,8 @@ function buildTexml(persona: string, to: string): string {
 <Response>
   <Say voice="${VOICE}" language="en-US">${escapeXml(greeting)}</Say>
   <Gather input="speech" action="${appUrl}/api/voice/gather/" method="POST"
-    speechTimeout="3" speechModel="experimental_conversations" language="en-US"
-    hints="yes,no,help,emergency,claim,damage,insurance,HVAC,heating,cooling,attorney,lawyer,billing,payment">
-    <Say voice="${VOICE}" language="en-US">Go ahead, I'm listening.</Say>
+    speechTimeout="1" speechModel="google_enhanced" language="en-US"
+    hints="yes,no,claim,damage,HVAC,attorney,billing,insurance,emergency,help">
   </Gather>
   <Say voice="${VOICE}" language="en-US">I didn't catch that. Let me try again.</Say>
   <Redirect method="POST">${appUrl}/api/voice/?To=${encodeURIComponent(to)}</Redirect>
