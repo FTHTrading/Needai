@@ -2,16 +2,16 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export const dynamic = 'force-dynamic';
 
-// Persona greetings — concise, warm, professional
+// Persona greetings — short, snappy, faster TTS playback
 const PERSONA_GREETINGS: Record<string, string> = {
-  STORM:   "Thank you for calling Storm Damage Response. I'm your AI intake specialist. How can I help assess your damage today?",
-  HAIL:    "Thank you for calling Hail Damage Assistance. I'm here to help you get your claim started quickly. Can you describe what happened?",
-  HVAC:    "Thank you for calling HVAC Emergency Services. I'm ready to help get your system back up and running. What's going on with it today?",
-  CLAIMS:  "Thank you for calling Insurance Claims. I'm your AI claims specialist. What type of claim can I help you with today?",
-  LAW:     "Thank you for calling Legal Services. I'm here to connect you with the right attorney. What legal matter can I assist you with?",
-  MONEY:   "Thank you for calling Financial Services. I'm your personal finance specialist. How can I help you today?",
-  WILKINS: "Thank you for calling. You've reached Wilkins Media. I'm your AI assistant here to connect you with the right person. How can I help you today?",
-  NEED:    "Thank you for calling. You've reached our AI answering service. I'm here to connect you with exactly the right specialist. What can I help you with today?",
+  STORM:   "Storm Damage Response, this is your AI specialist. What happened and where?",
+  HAIL:    "Hail Damage Assistance, how can I help you today?",
+  HVAC:    "HVAC Emergency line, what's going on with your system?",
+  CLAIMS:  "Insurance Claims, this is your AI specialist. What can I help you with?",
+  LAW:     "Legal Services, how can I help you today?",
+  MONEY:   "Financial Services, how can I help you today?",
+  WILKINS: "Wilkins Media, how can I help you today?",
+  NEED:    "Thank you for calling. How can I help you today?",
 };
 
 // Telnyx TeXML — best available neural voice, very human-sounding, zero TTS latency
@@ -21,16 +21,15 @@ function buildTexml(persona: string, to: string): string {
   const greeting = PERSONA_GREETINGS[persona] ?? PERSONA_GREETINGS['NEED'];
   const appUrl = process.env.NEXT_PUBLIC_APP_URL?.replace('http://localhost:3000', 'https://needai.unykorn.org') || 'https://needai.unykorn.org';
 
+  const toEncoded = encodeURIComponent(to);
   return `<?xml version="1.0" encoding="UTF-8"?>
 <Response>
-  <Say voice="${VOICE}" language="en-US">${escapeXml(greeting)}</Say>
-  <Gather input="speech" action="${appUrl}/api/voice/gather/" method="POST"
+  <Gather input="speech" action="${appUrl}/api/voice/gather/?To=${toEncoded}" method="POST"
     speechTimeout="2" speechModel="experimental_conversations" language="en-US"
     hints="yes,no,claim,damage,HVAC,attorney,billing,insurance,emergency,help">
-    <Say voice="${VOICE}" language="en-US">Go ahead.</Say>
+    <Say voice="${VOICE}" language="en-US">${escapeXml(greeting)}</Say>
   </Gather>
-  <Say voice="${VOICE}" language="en-US">I didn't catch that. Let me try again.</Say>
-  <Redirect method="POST">${appUrl}/api/voice/?To=${encodeURIComponent(to)}</Redirect>
+  <Redirect method="POST">${appUrl}/api/voice/?To=${toEncoded}</Redirect>
 </Response>`;
 }
 

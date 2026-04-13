@@ -5,48 +5,39 @@ export const dynamic = 'force-dynamic';
 const VOICE = 'Polly.Joanna-Neural';
 const OPENAI_KEY = process.env.OPENAI_API_KEY;
 
-// System prompts per persona — concise phone context
+// System prompts per persona — tight and direct, fewer tokens = faster response
 const SYSTEM_PROMPTS: Record<string, string> = {
-  STORM: `You are a storm damage intake specialist on a phone call. Be warm, urgent, and concise.
-Your job: assess property damage, gather the caller's name, address, and callback number, and tell them a specialist will follow up within the hour.
-Keep responses under 3 sentences. Speak naturally — this will be spoken aloud.
-DO NOT use asterisks, bullet points, formatting, or URLs.`,
+  STORM: `Phone intake for storm damage. Be brief and direct.
+Collect: caller name, property address, type of damage, callback number. Tell them a specialist calls back within the hour.
+2 sentences max. Natural speech only. No lists, bullets, asterisks, or URLs.`,
 
-  HAIL: `You are a hail damage intake specialist on a phone call. Be empathetic and efficient.
-Your job: assess hail/weather damage, collect name, address, insurance company if they have one, and callback number.
-Keep responses under 3 sentences. Speak naturally — this will be spoken aloud.
-DO NOT use asterisks, bullet points, formatting, or URLs.`,
+  HAIL: `Phone intake for hail damage. Be empathetic and efficient.
+Collect: name, address, insurance company if they have one, callback number.
+2 sentences max. Natural speech only. No lists, bullets, asterisks, or URLs.`,
 
-  HVAC: `You are an HVAC service intake specialist on a phone call. Be friendly and solution-focused.
-Your job: understand the heating or cooling issue, determine if it's an emergency, and collect name, address, and callback number.
-Keep responses under 3 sentences. Speak naturally — this will be spoken aloud.
-DO NOT use asterisks, bullet points, formatting, or URLs.`,
+  HVAC: `Phone intake for HVAC service. Be friendly and direct.
+Collect: name, address, what's wrong with the system, callback number.
+2 sentences max. Natural speech only. No lists, bullets, asterisks, or URLs.`,
 
-  CLAIMS: `You are an insurance claims intake specialist on a phone call. Be calm, professional, and thorough.
-Your job: understand the type of claim, collect the caller's name, policy number if they have it, address, and callback number.
-Keep responses under 3 sentences. Speak naturally — this will be spoken aloud.
-DO NOT use asterisks, bullet points, formatting, or URLs.`,
+  CLAIMS: `Phone intake for insurance claims. Be calm and professional.
+Collect: name, type of claim, policy number if they have it, callback number.
+2 sentences max. Natural speech only. No lists, bullets, asterisks, or URLs.`,
 
-  LAW: `You are a legal intake specialist on a phone call. Be professional, serious, and reassuring.
-Your job: understand the legal matter, collect caller's name, brief description of their situation, and callback number.
-Keep responses under 3 sentences. Speak naturally — this will be spoken aloud.
-DO NOT use asterisks, bullet points, formatting, or URLs.`,
+  LAW: `Phone intake for legal services. Be professional and reassuring.
+Collect: name, brief description of their legal matter, callback number.
+2 sentences max. Natural speech only. No lists, bullets, asterisks, or URLs.`,
 
-  MONEY: `You are a financial services intake specialist on a phone call. Be professional and trustworthy.
-Your job: understand the financial need, collect caller's name, their primary concern, and callback number.
-Keep responses under 3 sentences. Speak naturally — this will be spoken aloud.
-DO NOT use asterisks, bullet points, formatting, or URLs.`,
+  MONEY: `Phone intake for financial services. Be confident and trustworthy.
+Collect: name, what financial help they need, callback number.
+2 sentences max. Natural speech only. No lists, bullets, asterisks, or URLs.`,
 
-  NEED: `You are a friendly AI intake specialist at a professional answering service, on a phone call.
-Your job: understand what the caller needs, match them to the right service, and collect their name, address or location, and best callback number.
-Services you cover: home repairs, storm damage, HVAC, insurance claims, legal matters, and financial services.
-Keep responses under 3 sentences. Speak naturally — this will be spoken aloud.
-DO NOT use asterisks, bullet points, formatting, or URLs.`,
+  NEED: `Phone intake specialist. Be warm and helpful.
+Identify what the caller needs, route to the right service, collect name and callback number.
+2 sentences max. Natural speech only. No lists, bullets, asterisks, or URLs.`,
 
-  WILKINS: `You are a professional AI receptionist at Wilkins Media, answering the phone.
-Your job: greet the caller warmly, find out what they're calling about, and collect their name and best callback number so the right person at Wilkins Media can follow up.
-Keep responses under 3 sentences. Speak naturally — this will be spoken aloud.
-DO NOT use asterisks, bullet points, formatting, or URLs.`,
+  WILKINS: `AI receptionist for Wilkins Media. Be professional and warm.
+Find out what they're calling about, collect name and callback number for follow-up.
+2 sentences max. Natural speech only. No lists, bullets, asterisks, or URLs.`,
 };
 
 function escapeXml(text: string): string {
@@ -137,16 +128,18 @@ export async function POST(request: NextRequest) {
     let to = '';
     let clientState = '';
 
+    const urlTo = request.nextUrl.searchParams.get('To') ?? '';
+
     if (contentType.includes('application/json')) {
       const body = await request.json();
       speechResult = body.SpeechResult ?? body.speechResult ?? '';
-      to = body.To ?? body.to ?? '';
+      to = body.To ?? body.to ?? urlTo;
       clientState = body.ClientState ?? body.clientState ?? '';
     } else {
       const text = await request.text();
       const params = new URLSearchParams(text);
       speechResult = params.get('SpeechResult') ?? '';
-      to = params.get('To') ?? '';
+      to = params.get('To') ?? urlTo;
       clientState = params.get('ClientState') ?? '';
     }
 
@@ -172,13 +165,15 @@ export async function POST(request: NextRequest) {
       ? await getAIResponse(speechResult, persona, conversationHistory.slice(0, -1))
       : "I didn't catch anything. What can I help you with today?";
 
-    // Add AI response to history (keep last 10 turns to stay within URL limits)
+    // Add AI response to history (keep last 6 turns to stay within limits)
     conversationHistory.push({ role: 'assistant', content: aiResponse });
-    if (conversationHistory.length > 10) {
-      conversationHistory = conversationHistory.slice(-10);
+    if (conversationHistory.length > 6) {
+      conversationHistory = conversationHistory.slice(-6);
     }
 
     const newClientState = Buffer.from(JSON.stringify(conversationHistory)).toString('base64');
+    const safeClientState = escapeXml(newClientState);
+    const toEncoded = encodeURIComponent(to);
 
     // Detect if conversation should end (collected enough info)
     const shouldEnd = aiResponse.toLowerCase().includes('goodbye') ||
@@ -195,13 +190,12 @@ export async function POST(request: NextRequest) {
       : `<?xml version="1.0" encoding="UTF-8"?>
 <Response>
   <Say voice="${VOICE}" language="en-US">${escapeXml(aiResponse)}</Say>
-  <Gather input="speech" action="${appUrl}/api/voice/gather/" method="POST"
-    speechTimeout="3" speechModel="experimental_conversations" language="en-US"
-    clientState="${newClientState}">
-    <Pause length="1"/>
+  <Gather input="speech" action="${appUrl}/api/voice/gather/?To=${toEncoded}" method="POST"
+    speechTimeout="2" speechModel="experimental_conversations" language="en-US"
+    clientState="${safeClientState}">
+    <Say voice="${VOICE}" language="en-US">Go ahead.</Say>
   </Gather>
-  <Say voice="${VOICE}" language="en-US">Are you still there? Take your time.</Say>
-  <Redirect method="POST">${appUrl}/api/voice/gather/</Redirect>
+  <Redirect method="POST">${appUrl}/api/voice/?To=${toEncoded}</Redirect>
 </Response>`;
 
     return new NextResponse(texml, {
