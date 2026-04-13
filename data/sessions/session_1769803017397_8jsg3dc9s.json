@@ -1,0 +1,57 @@
+{
+  "sessionId": "session_1769803017397_8jsg3dc9s",
+  "persona": "STORM",
+  "callerId": "+1555123456",
+  "createdAt": "2026-01-30T19:56:57.397Z",
+  "lastActivity": "2026-01-30T19:56:57.403Z",
+  "turnCount": 2,
+  "status": "active",
+  "memory": {
+    "facts": {},
+    "context": {},
+    "history": [
+      {
+        "input": "My roof was damaged in a storm last night",
+        "response": "Hello! I'm here to help with your storm needs. How can I assist you today?\n\nI've noted the damage details. Do you have photos of the damage that you can share?",
+        "extractedFacts": {
+          "personal": {},
+          "incident": {
+            "description": "damage",
+            "location": "roof"
+          },
+          "intent": {
+            "secondary": []
+          },
+          "context": {}
+        },
+        "intent": "report_damage",
+        "confidence": 0.8,
+        "turn": 1,
+        "timestamp": "2026-01-30T19:56:57.401Z"
+      },
+      {
+        "input": "The wind tore off part of my roof and it's leaking",
+        "response": "Hello! I'm here to help with your storm needs. How can I assist you today?\n\nI've noted the damage details. Do you have photos of the damage that you can share?",
+        "extractedFacts": {
+          "personal": {},
+          "incident": {
+            "location": "roof",
+            "type": "wind"
+          },
+          "intent": {
+            "secondary": []
+          },
+          "context": {}
+        },
+        "intent": "report_damage",
+        "confidence": 0.75,
+        "turn": 2,
+        "timestamp": "2026-01-30T19:56:57.403Z"
+      }
+    ]
+  },
+  "metadata": {
+    "source": "call",
+    "priority": "medium"
+  }
+}

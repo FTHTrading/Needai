@@ -1,0 +1,692 @@
+{
+    "$schema":  "./numbers.schema.json",
+    "version":  "1.0.0",
+    "lastUpdated":  "2026-02-07",
+    "description":  "Canonical source of truth for all phone numbers in the CallRail OS / Vanity AI system",
+    "numbers":  [
+                    {
+                        "id":  "xrpl-sovereign",
+                        "vanity":  "877-570-XRPL",
+                        "digits":  "8775709775",
+                        "e164":  "+18775709775",
+                        "persona":  "XRPL",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "XRPL",
+                        "active":  true,
+                        "priority":  "canonical",
+                        "locked":  true,
+                        "notes":  "XRPL canonical number - T9 keypad mnemonic (9775=XRPL). Locked routing for blockchain operations, attestation, and wallet management. Never repurpose.",
+                        "endpoints":  [
+                                          "xrpl_explorer",
+                                          "attestation",
+                                          "wallet_operations",
+                                          "verification"
+                                      ]
+                    },
+                    {
+                        "id":  "storm-ga-primary",
+                        "vanity":  "470-STORM",
+                        "digits":  "4702878676",
+                        "e164":  "+14702878676",
+                        "persona":  "STORM",
+                        "region":  "Georgia",
+                        "type":  "local",
+                        "campaign":  "STORM",
+                        "active":  true,
+                        "priority":  "primary",
+                        "notes":  "Primary Georgia storm intake"
+                    },
+                    {
+                        "id":  "storm-fl-tampa",
+                        "vanity":  "727-STORM",
+                        "digits":  "7273878676",
+                        "e164":  "+17273878676",
+                        "persona":  "STORM",
+                        "region":  "Florida - Tampa Bay",
+                        "type":  "local",
+                        "campaign":  "STORM",
+                        "active":  true,
+                        "priority":  "primary"
+                    },
+                    {
+                        "id":  "storm-fl-miami",
+                        "vanity":  "786-STORM",
+                        "digits":  "7866778676",
+                        "e164":  "+17866778676",
+                        "persona":  "STORM",
+                        "region":  "Florida - Miami",
+                        "type":  "local",
+                        "campaign":  "STORM",
+                        "active":  true,
+                        "priority":  "primary"
+                    },
+                    {
+                        "id":  "storm-az-phoenix",
+                        "vanity":  "623-STORM",
+                        "digits":  "6237778676",
+                        "e164":  "+16237778676",
+                        "persona":  "STORM",
+                        "region":  "Arizona - Phoenix",
+                        "type":  "local",
+                        "campaign":  "STORM",
+                        "active":  true,
+                        "priority":  "primary"
+                    },
+                    {
+                        "id":  "storm-ca-la",
+                        "vanity":  "213-STORM",
+                        "digits":  "2134237865",
+                        "e164":  "+12134237865",
+                        "persona":  "STORM",
+                        "region":  "California - Los Angeles",
+                        "type":  "local",
+                        "campaign":  "STORM",
+                        "active":  true,
+                        "priority":  "secondary"
+                    },
+                    {
+                        "id":  "storm-md-baltimore",
+                        "vanity":  "443-STORM",
+                        "digits":  "4434378657",
+                        "e164":  "+14434378657",
+                        "persona":  "STORM",
+                        "region":  "Maryland - Baltimore",
+                        "type":  "local",
+                        "campaign":  "STORM",
+                        "active":  true,
+                        "priority":  "secondary"
+                    },
+                    {
+                        "id":  "storm-ga-atlanta-suburbs",
+                        "vanity":  "770-STORM",
+                        "digits":  "7702300635",
+                        "e164":  "+17702300635",
+                        "persona":  "STORM",
+                        "region":  "Georgia - Atlanta Suburbs",
+                        "type":  "local",
+                        "campaign":  "STORM",
+                        "active":  true,
+                        "priority":  "secondary"
+                    },
+                    {
+                        "id":  "storm-ga-macon",
+                        "vanity":  "478-STORM",
+                        "digits":  "4782424246",
+                        "e164":  "+14782424246",
+                        "persona":  "STORM",
+                        "region":  "Georgia - Macon",
+                        "type":  "local",
+                        "campaign":  "STORM",
+                        "active":  true,
+                        "priority":  "secondary"
+                    },
+                    {
+                        "id":  "storm-fl-space-coast",
+                        "vanity":  "321-STORM",
+                        "digits":  "3215590559",
+                        "e164":  "+13215590559",
+                        "persona":  "STORM",
+                        "region":  "Florida - Space Coast",
+                        "type":  "local",
+                        "campaign":  "STORM",
+                        "active":  true,
+                        "priority":  "secondary"
+                    },
+                    {
+                        "id":  "storm-fl-space-coast-alt",
+                        "vanity":  "321-STORM",
+                        "digits":  "3214858333",
+                        "e164":  "+13214858333",
+                        "persona":  "STORM",
+                        "region":  "Florida - Space Coast",
+                        "type":  "local",
+                        "campaign":  "STORM",
+                        "active":  true,
+                        "priority":  "tertiary",
+                        "notes":  "Alternate Space Coast number"
+                    },
+                    {
+                        "id":  "storm-ga-coastal",
+                        "vanity":  "912-COASTAL",
+                        "digits":  "9129106333",
+                        "e164":  "+19129106333",
+                        "persona":  "STORM",
+                        "region":  "Georgia - Coastal",
+                        "type":  "local",
+                        "campaign":  "STORM",
+                        "active":  true,
+                        "priority":  "secondary"
+                    },
+                    {
+                        "id":  "hail-wi-milwaukee-suburbs",
+                        "vanity":  "262-HAIL",
+                        "digits":  "2623974245",
+                        "e164":  "+12623974245",
+                        "persona":  "HAIL",
+                        "region":  "Wisconsin - Milwaukee Suburbs",
+                        "type":  "local",
+                        "campaign":  "HAIL",
+                        "active":  true,
+                        "priority":  "primary"
+                    },
+                    {
+                        "id":  "hail-wi-milwaukee",
+                        "vanity":  "414-HAIL",
+                        "digits":  "4146766337",
+                        "e164":  "+14146766337",
+                        "persona":  "HAIL",
+                        "region":  "Wisconsin - Milwaukee",
+                        "type":  "local",
+                        "campaign":  "HAIL",
+                        "active":  true,
+                        "priority":  "primary"
+                    },
+                    {
+                        "id":  "hail-ca-inland",
+                        "vanity":  "909-ROOF",
+                        "digits":  "9094887663",
+                        "e164":  "+19094887663",
+                        "persona":  "HAIL",
+                        "region":  "California - Inland Empire",
+                        "type":  "local",
+                        "campaign":  "HAIL",
+                        "active":  true,
+                        "priority":  "secondary"
+                    },
+                    {
+                        "id":  "hail-ks-wichita",
+                        "vanity":  "539-ROOF",
+                        "digits":  "5394767663",
+                        "e164":  "+15394767663",
+                        "persona":  "HAIL",
+                        "region":  "Kansas - Wichita",
+                        "type":  "local",
+                        "campaign":  "HAIL",
+                        "active":  true,
+                        "priority":  "secondary"
+                    },
+                    {
+                        "id":  "hvac-tollfree-primary",
+                        "vanity":  "833-HVAC-AI",
+                        "digits":  "8337604328",
+                        "e164":  "+18337604328",
+                        "persona":  "HVAC",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "HVAC",
+                        "active":  true,
+                        "priority":  "primary"
+                    },
+                    {
+                        "id":  "hvac-tollfree-urgent",
+                        "vanity":  "833-HVAC-NOW",
+                        "digits":  "8336024822",
+                        "e164":  "+18336024822",
+                        "persona":  "HVAC",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "HVAC",
+                        "active":  true,
+                        "priority":  "primary",
+                        "notes":  "Urgent requests"
+                    },
+                    {
+                        "id":  "hvac-tollfree-general",
+                        "vanity":  "833-HVAC-CALL",
+                        "digits":  "8335222653",
+                        "e164":  "+18335222653",
+                        "persona":  "HVAC",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "HVAC",
+                        "active":  true,
+                        "priority":  "secondary",
+                        "notes":  "General inquiries"
+                    },
+                    {
+                        "id":  "claims-tollfree-primary",
+                        "vanity":  "844-CLAIM",
+                        "digits":  "8447252460",
+                        "e164":  "+18447252460",
+                        "persona":  "CLAIMS",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "CLAIMS",
+                        "active":  true,
+                        "priority":  "primary"
+                    },
+                    {
+                        "id":  "claims-tollfree-overflow-1",
+                        "vanity":  "855-CLAIM",
+                        "digits":  "8557062533",
+                        "e164":  "+18557062533",
+                        "persona":  "CLAIMS",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "CLAIMS",
+                        "active":  true,
+                        "priority":  "secondary",
+                        "notes":  "Overflow"
+                    },
+                    {
+                        "id":  "claims-tollfree-overflow-2",
+                        "vanity":  "877-CLAIM",
+                        "digits":  "8775709775",
+                        "e164":  "+18775709775",
+                        "persona":  "CLAIMS",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "CLAIMS",
+                        "active":  true,
+                        "priority":  "secondary",
+                        "notes":  "Overflow"
+                    },
+                    {
+                        "id":  "claims-tollfree-file",
+                        "vanity":  "888-FILE-CLAIM",
+                        "digits":  "8887120268",
+                        "e164":  "+18887120268",
+                        "persona":  "CLAIMS",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "CLAIMS",
+                        "active":  true,
+                        "priority":  "secondary"
+                    },
+                    {
+                        "id":  "claims-tollfree-my-claim",
+                        "vanity":  "888-MY-CLAIM",
+                        "digits":  "8886812729",
+                        "e164":  "+18886812729",
+                        "persona":  "CLAIMS",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "CLAIMS",
+                        "active":  true,
+                        "priority":  "secondary"
+                    },
+                    {
+                        "id":  "law-tollfree-ai-primary",
+                        "vanity":  "888-LAW-AI",
+                        "digits":  "8885052924",
+                        "e164":  "+18885052924",
+                        "persona":  "LAW",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "LAW",
+                        "active":  true,
+                        "priority":  "primary",
+                        "notes":  "AI-powered legal intake"
+                    },
+                    {
+                        "id":  "law-tollfree-ai-alt",
+                        "vanity":  "833-LAW-AI",
+                        "digits":  "8334452924",
+                        "e164":  "+18334452924",
+                        "persona":  "LAW",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "LAW",
+                        "active":  true,
+                        "priority":  "primary",
+                        "notes":  "AI-powered legal (alternate)"
+                    },
+                    {
+                        "id":  "law-tollfree-call",
+                        "vanity":  "888-LAW-CALL",
+                        "digits":  "8886490529",
+                        "e164":  "+18886490529",
+                        "persona":  "LAW",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "LAW",
+                        "active":  true,
+                        "priority":  "secondary"
+                    },
+                    {
+                        "id":  "law-tollfree-case",
+                        "vanity":  "888-LAW-CASE",
+                        "digits":  "8886532529",
+                        "e164":  "+18886532529",
+                        "persona":  "LAW",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "LAW",
+                        "active":  true,
+                        "priority":  "secondary"
+                    },
+                    {
+                        "id":  "law-tollfree-help",
+                        "vanity":  "888-LAW-HELP",
+                        "digits":  "8887631529",
+                        "e164":  "+18887631529",
+                        "persona":  "LAW",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "LAW",
+                        "active":  true,
+                        "priority":  "secondary"
+                    },
+                    {
+                        "id":  "law-tollfree-now",
+                        "vanity":  "888-LAW-NOW",
+                        "digits":  "8889740529",
+                        "e164":  "+18889740529",
+                        "persona":  "LAW",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "LAW",
+                        "active":  true,
+                        "priority":  "secondary"
+                    },
+                    {
+                        "id":  "law-tollfree-docs",
+                        "vanity":  "888-LAW-DOCS",
+                        "digits":  "8886430529",
+                        "e164":  "+18886430529",
+                        "persona":  "LAW",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "LAW",
+                        "active":  true,
+                        "priority":  "tertiary"
+                    },
+                    {
+                        "id":  "law-tollfree-esc",
+                        "vanity":  "888-LAW-ESC",
+                        "digits":  "8886115384",
+                        "e164":  "+18886115384",
+                        "persona":  "LAW",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "LAW",
+                        "active":  true,
+                        "priority":  "tertiary",
+                        "notes":  "Escalation line"
+                    },
+                    {
+                        "id":  "money-tollfree-buck",
+                        "vanity":  "888-BUCK-AI",
+                        "digits":  "8886762825",
+                        "e164":  "+18886762825",
+                        "persona":  "MONEY",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "MONEY",
+                        "active":  true,
+                        "priority":  "primary"
+                    },
+                    {
+                        "id":  "money-tollfree-cash",
+                        "vanity":  "888-CASH-AI",
+                        "digits":  "8886780645",
+                        "e164":  "+18886780645",
+                        "persona":  "MONEY",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "MONEY",
+                        "active":  true,
+                        "priority":  "primary"
+                    },
+                    {
+                        "id":  "money-tollfree-bank",
+                        "vanity":  "866-BANK-AI",
+                        "digits":  "8662652924",
+                        "e164":  "+18662652924",
+                        "persona":  "MONEY",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "MONEY",
+                        "active":  true,
+                        "priority":  "secondary"
+                    },
+                    {
+                        "id":  "need-tollfree-primary",
+                        "vanity":  "844-NEED",
+                        "digits":  "8446336333",
+                        "e164":  "+18446336333",
+                        "persona":  "NEED",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "NEED",
+                        "active":  true,
+                        "priority":  "primary",
+                        "notes":  "Universal intake router"
+                    },
+                    {
+                        "id":  "need-ga-coastal",
+                        "vanity":  "912-NEED",
+                        "digits":  "9129106333",
+                        "e164":  "+19129106333",
+                        "persona":  "NEED",
+                        "region":  "Georgia - Coastal",
+                        "type":  "local",
+                        "campaign":  "NEED",
+                        "active":  true,
+                        "priority":  "primary",
+                        "notes":  "Universal intake router (regional)"
+                    },
+                    {
+                        "id":  "need-tollfree-assist",
+                        "vanity":  "888-ASSIST",
+                        "digits":  "8888550209",
+                        "e164":  "+18888550209",
+                        "persona":  "NEED",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "NEED",
+                        "active":  true,
+                        "priority":  "secondary"
+                    },
+                    {
+                        "id":  "need-tollfree-help",
+                        "vanity":  "888-HELP-AI",
+                        "digits":  "8883442825",
+                        "e164":  "+18883442825",
+                        "persona":  "NEED",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "NEED",
+                        "active":  true,
+                        "priority":  "secondary"
+                    },
+                    {
+                        "id":  "need-tollfree-trust",
+                        "vanity":  "888-TRUST-AI",
+                        "digits":  "8884748738",
+                        "e164":  "+18884748738",
+                        "persona":  "NEED",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "NEED",
+                        "active":  true,
+                        "priority":  "secondary"
+                    },
+                    {
+                        "id":  "need-tollfree-route",
+                        "vanity":  "844-ROUTE",
+                        "digits":  "8447561580",
+                        "e164":  "+18447561580",
+                        "persona":  "NEED",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "NEED",
+                        "active":  true,
+                        "priority":  "tertiary",
+                        "notes":  "Call routing"
+                    },
+                    {
+                        "id":  "need-tollfree-hail-1",
+                        "vanity":  "844-HAIL",
+                        "digits":  "8449674245",
+                        "e164":  "+18449674245",
+                        "persona":  "NEED",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "NEED",
+                        "active":  true,
+                        "priority":  "tertiary",
+                        "notes":  "Hail routing"
+                    },
+                    {
+                        "id":  "need-tollfree-hail-2",
+                        "vanity":  "844-HAIL",
+                        "digits":  "8449854245",
+                        "e164":  "+18449854245",
+                        "persona":  "NEED",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "NEED",
+                        "active":  true,
+                        "priority":  "tertiary",
+                        "notes":  "Hail routing (alternate)"
+                    },
+                    {
+                        "id":  "wilkins-media-billboard",
+                        "vanity":  "844-851-6334",
+                        "digits":  "8448516334",
+                        "e164":  "+18448516334",
+                        "persona":  "NEED",
+                        "region":  "National",
+                        "type":  "toll-free",
+                        "campaign":  "NEED",
+                        "active":  true,
+                        "priority":  "primary",
+                        "notes":  "Wilkins Media dedicated billboard AI line. Toll-free. Tags: wilkins-media."
+                    }
+                ],
+    "campaigns":  {
+                      "STORM":  {
+                                    "name":  "Storm Damage",
+                                    "description":  "Emergency property restoration",
+                                    "count":  11,
+                                    "personas":  [
+                                                     "STORM"
+                                                 ]
+                                },
+                      "HAIL":  {
+                                   "name":  "Hail Damage",
+                                   "description":  "Hail damage assessment and claims",
+                                   "count":  4,
+                                   "personas":  [
+                                                    "HAIL"
+                                                ]
+                               },
+                      "HVAC":  {
+                                   "name":  "HVAC Services",
+                                   "description":  "Heating \u0026 cooling emergency services",
+                                   "count":  3,
+                                   "personas":  [
+                                                    "HVAC"
+                                                ]
+                               },
+                      "CLAIMS":  {
+                                     "name":  "Insurance Claims",
+                                     "description":  "Insurance claims processing",
+                                     "count":  5,
+                                     "personas":  [
+                                                      "CLAIMS"
+                                                  ]
+                                 },
+                      "LAW":  {
+                                  "name":  "Legal Services",
+                                  "description":  "Legal intake and case screening",
+                                  "count":  8,
+                                  "personas":  [
+                                                   "LAW"
+                                               ]
+                              },
+                      "MONEY":  {
+                                    "name":  "Financial Services",
+                                    "description":  "Cash, funding, and payment assistance",
+                                    "count":  3,
+                                    "personas":  [
+                                                     "MONEY"
+                                                 ]
+                                },
+                      "NEED":  {
+                                   "name":  "Universal Intake",
+                                   "description":  "Multi-service routing and assistance",
+                                   "count":  8,
+                                   "personas":  [
+                                                    "NEED"
+                                                ]
+                               }
+                  },
+    "personas":  {
+                     "STORM":  {
+                                   "name":  "Storm Damage Intake",
+                                   "script":  "personas/STORM.md",
+                                   "capabilities":  [
+                                                        "emergency_routing",
+                                                        "property_damage_assessment",
+                                                        "contractor_dispatch"
+                                                    ]
+                               },
+                     "HAIL":  {
+                                  "name":  "Hail Damage Assessment",
+                                  "script":  "personas/HAIL.md",
+                                  "capabilities":  [
+                                                       "damage_assessment",
+                                                       "claims_correlation",
+                                                       "contractor_routing"
+                                                   ]
+                              },
+                     "HVAC":  {
+                                  "name":  "HVAC Services",
+                                  "script":  "personas/HVAC.md",
+                                  "capabilities":  [
+                                                       "service_dispatch",
+                                                       "emergency_routing",
+                                                       "appointment_scheduling"
+                                                   ]
+                              },
+                     "CLAIMS":  {
+                                    "name":  "Insurance Claims",
+                                    "script":  "personas/CLAIMS.md",
+                                    "capabilities":  [
+                                                         "claims_intake",
+                                                         "evidence_collection",
+                                                         "insurer_routing"
+                                                     ]
+                                },
+                     "LAW":  {
+                                 "name":  "Legal Intake",
+                                 "script":  "personas/LAW.md",
+                                 "capabilities":  [
+                                                      "case_screening",
+                                                      "jurisdiction_check",
+                                                      "attorney_routing"
+                                                  ]
+                             },
+                     "MONEY":  {
+                                   "name":  "Financial Services",
+                                   "script":  "personas/MONEY.md",
+                                   "capabilities":  [
+                                                        "funding_qualification",
+                                                        "settlement_verification",
+                                                        "payment_routing"
+                                                    ]
+                               },
+                     "NEED":  {
+                                  "name":  "Universal Intake Router",
+                                  "script":  "personas/NEED.md",
+                                  "capabilities":  [
+                                                       "intent_detection",
+                                                       "service_routing",
+                                                       "multi_persona_dispatch"
+                                                   ]
+                              },
+                     "XRPL":  {
+                                  "name":  "XRPL Operations",
+                                  "script":  "personas/XRPL.md",
+                                  "capabilities":  [
+                                                       "wallet_operations",
+                                                       "attestation",
+                                                       "verification",
+                                                       "blockchain_queries"
+                                                   ]
+                              }
+                 }
+}

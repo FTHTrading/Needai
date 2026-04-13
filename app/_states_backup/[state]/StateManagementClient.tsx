@@ -1,0 +1,60 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import Navigation from '../../../components/Navigation';
+import { WeatherProvider } from '../../../lib/weather/provider';
+import { AIIntakeEngine } from '../../../lib/ai/intake-engine';
+
+export const states = [
+  { code: 'AL', name: 'Alabama', region: 'Southeast', timezone: 'Central' },
+  { code: 'AK', name: 'Alaska', region: 'West', timezone: 'Alaska' },
+  { code: 'AZ', name: 'Arizona', region: 'Southwest', timezone: 'Mountain' },
+  { code: 'AR', name: 'Arkansas', region: 'South', timezone: 'Central' },
+  { code: 'CA', name: 'California', region: 'West', timezone: 'Pacific' },
+  { code: 'CO', name: 'Colorado', region: 'Mountain', timezone: 'Mountain' },
+  { code: 'CT', name: 'Connecticut', region: 'Northeast', timezone: 'Eastern' },
+  { code: 'DE', name: 'Delaware', region: 'Northeast', timezone: 'Eastern' },
+  { code: 'FL', name: 'Florida', region: 'Southeast', timezone: 'Eastern' },
+  { code: 'GA', name: 'Georgia', region: 'Southeast', timezone: 'Eastern' },
+  { code: 'HI', name: 'Hawaii', region: 'West', timezone: 'Hawaii' },
+  { code: 'ID', name: 'Idaho', region: 'Mountain', timezone: 'Mountain' },
+  { code: 'IL', name: 'Illinois', region: 'Midwest', timezone: 'Central' },
+  { code: 'IN', name: 'Indiana', region: 'Midwest', timezone: 'Eastern' },
+  { code: 'IA', name: 'Iowa', region: 'Midwest', timezone: 'Central' },
+  { code: 'KS', name: 'Kansas', region: 'Midwest', timezone: 'Central' },
+  { code: 'KY', name: 'Kentucky', region: 'South', timezone: 'Eastern' },
+  { code: 'LA', name: 'Louisiana', region: 'South', timezone: 'Central' },
+  { code: 'ME', name: 'Maine', region: 'Northeast', timezone: 'Eastern' },
+  { code: 'MD', name: 'Maryland', region: 'Northeast', timezone: 'Eastern' },
+  { code: 'MA', name: 'Massachusetts', region: 'Northeast', timezone: 'Eastern' },
+  { code: 'MI', name: 'Michigan', region: 'Midwest', timezone: 'Eastern' },
+  { code: 'MN', name: 'Minnesota', region: 'Midwest', timezone: 'Central' },
+  { code: 'MS', name: 'Mississippi', region: 'South', timezone: 'Central' },
+  { code: 'MO', name: 'Missouri', region: 'Midwest', timezone: 'Central' },
+  { code: 'MT', name: 'Montana', region: 'Mountain', timezone: 'Mountain' },
+  { code: 'NE', name: 'Nebraska', region: 'Midwest', timezone: 'Central' },
+  { code: 'NV', name: 'Nevada', region: 'West', timezone: 'Pacific' },
+  { code: 'NH', name: 'New Hampshire', region: 'Northeast', timezone: 'Eastern' },
+  { code: 'NJ', name: 'New Jersey', region: 'Northeast', timezone: 'Eastern' },
+  { code: 'NM', name: 'New Mexico', region: 'Southwest', timezone: 'Mountain' },
+  { code: 'NY', name: 'New York', region: 'Northeast', timezone: 'Eastern' },
+  { code: 'NC', name: 'North Carolina', region: 'Southeast', timezone: 'Eastern' },
+  { code: 'ND', name: 'North Dakota', region: 'Midwest', timezone: 'Central' },
+  { code: 'OH', name: 'Ohio', region: 'Midwest', timezone: 'Eastern' },
+  { code: 'OK', name: 'Oklahoma', region: 'South', timezone: 'Central' },
+  { code: 'OR', name: 'Oregon', region: 'West', timezone: 'Pacific' },
+  { code: 'PA', name: 'Pennsylvania', region: 'Northeast', timezone: 'Eastern' },
+  { code: 'RI', name: 'Rhode Island', region: 'Northeast', timezone: 'Eastern' },
+  { code: 'SC', name: 'South Carolina', region: 'Southeast', timezone: 'Eastern' },
+  { code: 'SD', name: 'South Dakota', region: 'Midwest', timezone: 'Central' },
+  { code: 'TN', name: 'Tennessee', region: 'South', timezone: 'Central' },
+  { code: 'TX', name: 'Texas', region: 'South', timezone: 'Central' },
+  { code: 'UT', name: 'Utah', region: 'Mountain', timezone: 'Mountain' },
+  { code: 'VT', name: 'Vermont', region: 'Northeast', timezone: 'Eastern' },
+  { code: 'VA', name: 'Virginia', region: 'Southeast', timezone: 'Eastern' },
+  { code: 'WA', name: 'Washington', region: 'West', timezone: 'Pacific' },
+  { code: 'WV', name: 'West Virginia', region: 'South', timezone: 'Eastern' },
+  { code: 'WI', name: 'Wisconsin', region: 'Midwest', timezone: 'Central' },
+  { code: 'WY', name: 'Wyoming', region: 'Mountain', timezone: 'Mountain' }
+];

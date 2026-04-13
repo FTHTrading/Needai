@@ -1,0 +1,10 @@
+name = "vanity-ai"
+compatibility_date = "2026-02-03"
+pages_build_output_dir = "out"
+
+[env.production]
+name = "vanity-ai"
+route = "vanity.ai/*"
+
+[env.preview]
+name = "vanity-ai-preview"

@@ -1,0 +1,93 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Clawdbot: Refactor Current File",
+      "type": "shell",
+      "command": "npx",
+      "args": ["tsx", "scripts/clawdbot-cli.ts", "refactor_module", "--input", "{\"file\": \"${file}\"}"],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true }
+    },
+    {
+      "label": "Clawdbot: Audit Routing",
+      "type": "shell",
+      "command": "npx",
+      "args": ["tsx", "scripts/clawdbot-cli.ts", "--audit"],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true }
+    },
+    {
+      "label": "Clawdbot: Generate Tests",
+      "type": "shell",
+      "command": "npx",
+      "args": ["tsx", "scripts/clawdbot-cli.ts", "generate_tests", "--input", "{\"file\": \"${file}\"}"],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true }
+    },
+    {
+      "label": "Clawdbot: List Prompts",
+      "type": "shell",
+      "command": "npx",
+      "args": ["tsx", "scripts/clawdbot-cli.ts", "--list"],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true }
+    },
+    {
+      "label": "Telnyx: Init Check",
+      "type": "shell",
+      "command": "npx",
+      "args": ["tsx", "scripts/clawdbot-cli.ts", "telnyx:init"],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true }
+    },
+    {
+      "label": "Telnyx: Status",
+      "type": "shell",
+      "command": "npx",
+      "args": ["tsx", "scripts/clawdbot-cli.ts", "telnyx:status"],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true }
+    },
+    {
+      "label": "Telnyx: Test Call",
+      "type": "shell",
+      "command": "npx",
+      "args": ["tsx", "scripts/clawdbot-cli.ts", "telnyx:test"],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true }
+    },
+    {
+      "label": "Telnyx: Verify Numbers",
+      "type": "shell",
+      "command": "npx",
+      "args": ["tsx", "scripts/clawdbot-cli.ts", "telnyx:verify"],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true }
+    },
+    {
+      "label": "Dev: Start Next.js",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "dev"],
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Dev: Start ngrok",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "start:ngrok"],
+      "isBackground": true,
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "promptName",
+      "type": "pickString",
+      "description": "Select Clawdbot prompt",
+      "options": ["refactor_module", "audit_routing", "generate_tests", "add_persona", "weather_activation", "code_review"]
+    }
+  ]
+}

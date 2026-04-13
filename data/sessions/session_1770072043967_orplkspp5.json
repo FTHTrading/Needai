@@ -1,0 +1,36 @@
+{
+  "sessionId": "session_1770072043967_orplkspp5",
+  "persona": "STORM",
+  "callerId": "5551234567",
+  "callId": "call_1770072043963_e7fx1t52",
+  "createdAt": "2026-02-02T22:40:43.967Z",
+  "lastActivity": "2026-02-02T22:40:43.970Z",
+  "turnCount": 1,
+  "status": "active",
+  "memory": {
+    "facts": {},
+    "context": {},
+    "history": [
+      {
+        "input": "CALL_INITIATED",
+        "response": "Hello! I'm here to help with your storm needs. How can I assist you today?",
+        "extractedFacts": {
+          "personal": {},
+          "incident": {},
+          "intent": {
+            "secondary": []
+          },
+          "context": {}
+        },
+        "intent": "general_inquiry",
+        "confidence": 0.5,
+        "turn": 1,
+        "timestamp": "2026-02-02T22:40:43.970Z"
+      }
+    ]
+  },
+  "metadata": {
+    "source": "call",
+    "priority": "medium"
+  }
+}

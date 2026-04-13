@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+     width="1000" height="1000" viewBox="0 0 1000 1000">
+  <title>Hail Damage QR</title>
+  <desc>Scan for hail damage assessment</desc>
+  
+  <!-- White background -->
+  <rect width="1000" height="1000" fill="#FFFFFF"/>
+  
+  <!-- QR Code (use external service for actual generation) -->
+  <image x="50" y="50" width="900" height="900" 
+         xlink:href="https://api.qrserver.com/v1/create-qr-code/?size=900x900&amp;data=https%3A%2F%2Fvanity.ai%2Fhail%3Futm_source%3Dbillboard%26utm_medium%3Dqr%26utm_campaign%3Dhail&amp;format=svg"/>
+  
+  <!-- Campaign label (optional, can be removed for clean QR) -->
+  <text x="500" y="980" 
+        text-anchor="middle" 
+        font-family="Arial, sans-serif" 
+        font-size="24" 
+        font-weight="bold"
+        fill="#000000">HAIL</text>
+</svg>

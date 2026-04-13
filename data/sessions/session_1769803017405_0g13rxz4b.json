@@ -1,0 +1,38 @@
+{
+  "sessionId": "session_1769803017405_0g13rxz4b",
+  "persona": "HVAC",
+  "callerId": "+1555987654",
+  "createdAt": "2026-01-30T19:56:57.405Z",
+  "lastActivity": "2026-01-30T19:56:57.407Z",
+  "turnCount": 1,
+  "status": "active",
+  "memory": {
+    "facts": {},
+    "context": {},
+    "history": [
+      {
+        "input": "My heat stopped working and it's freezing in here",
+        "response": "Hello! I'm here to help with your hvac needs. How can I assist you today?",
+        "extractedFacts": {
+          "personal": {},
+          "incident": {
+            "type": "heat",
+            "description": "stopped"
+          },
+          "intent": {
+            "secondary": []
+          },
+          "context": {}
+        },
+        "intent": "general_inquiry",
+        "confidence": 0.75,
+        "turn": 1,
+        "timestamp": "2026-01-30T19:56:57.407Z"
+      }
+    ]
+  },
+  "metadata": {
+    "source": "sms",
+    "priority": "medium"
+  }
+}

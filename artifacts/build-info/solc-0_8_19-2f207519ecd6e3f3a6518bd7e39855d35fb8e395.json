@@ -1,0 +1,39 @@
+{
+  "_format": "hh3-sol-build-info-1",
+  "id": "solc-0_8_19-2f207519ecd6e3f3a6518bd7e39855d35fb8e395",
+  "solcVersion": "0.8.19",
+  "solcLongVersion": "0.8.19+commit.7dd6d404",
+  "userSourceNameMap": {
+    "contracts/AIAgent.sol": "project/contracts/AIAgent.sol"
+  },
+  "input": {
+    "language": "Solidity",
+    "settings": {
+      "evmVersion": "paris",
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "outputSelection": {
+        "*": {
+          "": [
+            "ast"
+          ],
+          "*": [
+            "abi",
+            "evm.bytecode",
+            "evm.deployedBytecode",
+            "evm.methodIdentifiers",
+            "metadata"
+          ]
+        }
+      },
+      "remappings": []
+    },
+    "sources": {
+      "project/contracts/AIAgent.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.19;\r\n\r\ncontract AIAgent {\r\n    uint256 private _tokenIdCounter;\r\n    address public owner;\r\n\r\n    struct BirthCertificate {\r\n        string name;\r\n        string persona;\r\n        uint256 birthTimestamp;\r\n        uint256 experience;\r\n        string vanityNumber;\r\n    }\r\n\r\n    mapping(uint256 => BirthCertificate) public birthCertificates;\r\n    mapping(uint256 => address) public ownerOf;\r\n    mapping(address => uint256) public balanceOf;\r\n\r\n    event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);\r\n    event AgentMinted(uint256 indexed tokenId, string name, string persona);\r\n    event AgentGrew(uint256 indexed tokenId, uint256 newExperience);\r\n\r\n    constructor() {\r\n        owner = msg.sender;\r\n    }\r\n\r\n    modifier onlyOwner() {\r\n        require(msg.sender == owner, \"Not owner\");\r\n        _;\r\n    }\r\n\r\n    function mintAgent(\r\n        address to,\r\n        string memory name,\r\n        string memory persona,\r\n        string memory vanityNumber\r\n    ) public onlyOwner returns (uint256) {\r\n        uint256 tokenId = _tokenIdCounter;\r\n        _tokenIdCounter++;\r\n\r\n        ownerOf[tokenId] = to;\r\n        balanceOf[to]++;\r\n\r\n        birthCertificates[tokenId] = BirthCertificate({\r\n            name: name,\r\n            persona: persona,\r\n            birthTimestamp: block.timestamp,\r\n            experience: 0,\r\n            vanityNumber: vanityNumber\r\n        });\r\n\r\n        emit Transfer(address(0), to, tokenId);\r\n        emit AgentMinted(tokenId, name, persona);\r\n        return tokenId;\r\n    }\r\n\r\n    function growAgent(uint256 tokenId, uint256 interactionPoints) public {\r\n        require(ownerOf[tokenId] == msg.sender || msg.sender == owner, \"Not authorized\");\r\n\r\n        birthCertificates[tokenId].experience += interactionPoints;\r\n\r\n        emit AgentGrew(tokenId, birthCertificates[tokenId].experience);\r\n    }\r\n\r\n    function getBirthCertificate(uint256 tokenId) public view returns (BirthCertificate memory) {\r\n        return birthCertificates[tokenId];\r\n    }\r\n}"
+      }
+    }
+  }
+}

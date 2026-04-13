@@ -1,0 +1,44 @@
+{
+  "timestamp": "2026-02-02T22:24:37.980Z",
+  "testNumber": "8885052924",
+  "canonicalHash": "9f9f820bc559072e",
+  "steps": [
+    {
+      "step": "webhook_received",
+      "status": "ok",
+      "details": "call.initiated"
+    },
+    {
+      "step": "normalize",
+      "status": "ok",
+      "details": "8885052924"
+    },
+    {
+      "step": "routing",
+      "status": "ok",
+      "details": "LAW"
+    },
+    {
+      "step": "persona_check",
+      "status": "ok",
+      "details": "3321 bytes"
+    },
+    {
+      "step": "ai_response",
+      "status": "ok",
+      "details": "72 chars"
+    },
+    {
+      "step": "tts_synthesis",
+      "status": "ok",
+      "details": "494302 bytes via local"
+    },
+    {
+      "step": "call_control",
+      "status": "ok",
+      "details": "3 commands"
+    }
+  ],
+  "success": true,
+  "totalDurationMs": 311
+}

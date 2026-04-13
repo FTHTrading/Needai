@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+     width="1000" height="1000" viewBox="0 0 1000 1000">
+  <title>Insurance Claims QR</title>
+  <desc>Scan to file or check claim status</desc>
+  
+  <!-- White background -->
+  <rect width="1000" height="1000" fill="#FFFFFF"/>
+  
+  <!-- QR Code (use external service for actual generation) -->
+  <image x="50" y="50" width="900" height="900" 
+         xlink:href="https://api.qrserver.com/v1/create-qr-code/?size=900x900&amp;data=https%3A%2F%2Fvanity.ai%2Fclaims%3Futm_source%3Dbillboard%26utm_medium%3Dqr%26utm_campaign%3Dclaims&amp;format=svg"/>
+  
+  <!-- Campaign label (optional, can be removed for clean QR) -->
+  <text x="500" y="980" 
+        text-anchor="middle" 
+        font-family="Arial, sans-serif" 
+        font-size="24" 
+        font-weight="bold"
+        fill="#000000">CLAIMS</text>
+</svg>

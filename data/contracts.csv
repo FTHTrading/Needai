@@ -1,0 +1,11 @@
+name,email,phone,signed,contract_url
+Alice Example,alice@example.com,+15550000001,true,https://example.com/contract/1
+Bob Example,bob@example.com,+15550000002,false,https://example.com/contract/2
+Carol Example,carol@example.com,+15550000003,true,https://example.com/contract/3
+Dan Example,dan@example.com,+15550000004,false,https://example.com/contract/4
+Eve Example,eve@example.com,+15550000005,false,https://example.com/contract/5
+Frank Example,frank@example.com,+15550000006,true,https://example.com/contract/6
+Grace Example,grace@example.com,+15550000007,false,https://example.com/contract/7
+Heidi Example,heidi@example.com,+15550000008,true,https://example.com/contract/8
+Ivan Example,ivan@example.com,+15550000009,false,https://example.com/contract/9
+Judy Example,judy@example.com,+15550000010,true,https://example.com/contract/10

@@ -1,0 +1,55 @@
+{
+  "generated": "2026-02-03T08:07:15.287Z",
+  "baseUrl": "https://vanity.ai",
+  "codes": [
+    {
+      "id": "qr-storm",
+      "campaign": "STORM",
+      "persona": "STORM",
+      "url": "https://vanity.ai/storm?utm_source=billboard&utm_medium=qr&utm_campaign=storm",
+      "file": "qr-storm.svg"
+    },
+    {
+      "id": "qr-hail",
+      "campaign": "HAIL",
+      "persona": "HAIL",
+      "url": "https://vanity.ai/hail?utm_source=billboard&utm_medium=qr&utm_campaign=hail",
+      "file": "qr-hail.svg"
+    },
+    {
+      "id": "qr-law",
+      "campaign": "LAW",
+      "persona": "LAW",
+      "url": "https://vanity.ai/law?utm_source=billboard&utm_medium=qr&utm_campaign=law",
+      "file": "qr-law.svg"
+    },
+    {
+      "id": "qr-claims",
+      "campaign": "CLAIMS",
+      "persona": "CLAIMS",
+      "url": "https://vanity.ai/claims?utm_source=billboard&utm_medium=qr&utm_campaign=claims",
+      "file": "qr-claims.svg"
+    },
+    {
+      "id": "qr-money",
+      "campaign": "MONEY",
+      "persona": "MONEY",
+      "url": "https://vanity.ai/money?utm_source=billboard&utm_medium=qr&utm_campaign=money",
+      "file": "qr-money.svg"
+    },
+    {
+      "id": "qr-hvac",
+      "campaign": "HVAC",
+      "persona": "HVAC",
+      "url": "https://vanity.ai/hvac?utm_source=billboard&utm_medium=qr&utm_campaign=hvac",
+      "file": "qr-hvac.svg"
+    },
+    {
+      "id": "qr-need",
+      "campaign": "NEED",
+      "persona": "NEED",
+      "url": "https://vanity.ai/need?utm_source=billboard&utm_medium=qr&utm_campaign=need",
+      "file": "qr-need.svg"
+    }
+  ]
+}

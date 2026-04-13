@@ -1,0 +1,33 @@
+{
+  "clawdbot": {
+    "version": "1.0.0",
+    "mode": "auto",
+    "local": {
+      "endpoint": "http://localhost:11434/api/generate",
+      "model": "llama3.2",
+      "fallback": true
+    },
+    "remote": {
+      "endpoint": "${OPENAI_API_ENDPOINT}",
+      "model": "gpt-4o-mini",
+      "apiKeyEnv": "OPENAI_API_KEY"
+    },
+    "defaults": {
+      "temperature": 0.1,
+      "maxRetries": 3,
+      "timeout": 30000
+    },
+    "audit": {
+      "enabled": true,
+      "logPath": ".ai/logs"
+    }
+  },
+  "prompts": {
+    "directory": ".ai/prompts",
+    "extensions": [".md"]
+  },
+  "rules": {
+    "path": ".ai/AI_RULES.md",
+    "enforced": true
+  }
+}
