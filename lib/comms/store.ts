@@ -380,7 +380,7 @@ export function writeNeedaiWorkspaceReports() {
   ].join('\n');
 
   writeJsonFile(path.join(auditsRoot, 'needai-module-audit.json'), audit);
-  fs.writeFileSync(path.join(reportsRoot, 'needai-phase2-implementation.md'), implementation, 'utf8');
-  fs.writeFileSync(path.join(backlogRoot, 'needai-phase2-priority.md'), backlog, 'utf8');
-  fs.writeFileSync(path.join(architectureRoot, 'needai-comms-pack-map.md'), architecture, 'utf8');
+  try { fs.writeFileSync(path.join(reportsRoot, 'needai-phase2-implementation.md'), implementation, 'utf8'); } catch { /* read-only */ }
+  try { fs.writeFileSync(path.join(backlogRoot, 'needai-phase2-priority.md'), backlog, 'utf8'); } catch { /* read-only */ }
+  try { fs.writeFileSync(path.join(architectureRoot, 'needai-comms-pack-map.md'), architecture, 'utf8'); } catch { /* read-only */ }
 }
