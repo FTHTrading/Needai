@@ -21,7 +21,7 @@ function extractJsonObject(text: string): string | null {
 }
 
 function computeConfidence(summary: string, callbackNumber?: string, contactName?: string, modelHint?: number): number {
-  let score = typeof modelHint === 'number' ? modelHint : 0.72;
+  let score = Number.isFinite(modelHint) ? modelHint : 0.72;
   if (contactName) score += 0.08;
   if (callbackNumber) score += 0.08;
   if (summary.length < 30) score -= 0.15;
@@ -160,7 +160,13 @@ export async function executeRuntime(input: RuntimeExecuteInput): Promise<Runtim
 
   const callbackNumber = parsed.callbackNumber ? normalizeNumber(String(parsed.callbackNumber)) : undefined;
   const summary = String(parsed.summary ?? input.callerInput);
-  const confidence = computeConfidence(summary, callbackNumber, parsed.contactName, Number(parsed.confidenceHint));
+  const modelHint = Number(parsed.confidenceHint);
+  const confidence = computeConfidence(
+    summary,
+    callbackNumber,
+    parsed.contactName,
+    Number.isFinite(modelHint) ? modelHint : undefined,
+  );
   const approvalRequired = Boolean(parsed.approvalRequired) || SENSITIVE_TERMS.some((term) => input.callerInput.toLowerCase().includes(term));
   const escalate = Boolean(parsed.escalate) || confidence < 0.65;
 
