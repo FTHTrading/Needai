@@ -23,28 +23,35 @@ const architectureRoot = path.join(workspaceRoot, 'architecture');
 const eventsPath = path.join(reportsRoot, 'needai-control-events.jsonl');
 
 function ensureDirs() {
-  for (const dir of [workspaceRoot, stateRoot, reportsRoot, auditsRoot, backlogRoot, architectureRoot]) {
-    fs.mkdirSync(dir, { recursive: true });
+  try {
+    for (const dir of [workspaceRoot, stateRoot, reportsRoot, auditsRoot, backlogRoot, architectureRoot]) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+  } catch {
+    // read-only filesystem (e.g. Vercel production) — skip silently
   }
 }
 
 function readJsonFile<T>(filePath: string, fallback: T): T {
-  ensureDirs();
-  if (!fs.existsSync(filePath)) {
-    fs.writeFileSync(filePath, JSON.stringify(fallback, null, 2), 'utf8');
-    return fallback;
-  }
   try {
+    ensureDirs();
+    if (!fs.existsSync(filePath)) {
+      try { fs.writeFileSync(filePath, JSON.stringify(fallback, null, 2), 'utf8'); } catch { /* read-only */ }
+      return fallback;
+    }
     return JSON.parse(fs.readFileSync(filePath, 'utf8')) as T;
   } catch {
-    fs.writeFileSync(filePath, JSON.stringify(fallback, null, 2), 'utf8');
     return fallback;
   }
 }
 
 function writeJsonFile<T>(filePath: string, value: T) {
-  ensureDirs();
-  fs.writeFileSync(filePath, JSON.stringify(value, null, 2), 'utf8');
+  try {
+    ensureDirs();
+    fs.writeFileSync(filePath, JSON.stringify(value, null, 2), 'utf8');
+  } catch {
+    // read-only filesystem (e.g. Vercel production) — log entry dropped silently
+  }
 }
 
 function statePath(name: string) {
@@ -56,8 +63,12 @@ function generateId(prefix: string) {
 }
 
 export function appendControlEvent(kind: string, payload: Record<string, unknown>) {
-  ensureDirs();
-  fs.appendFileSync(eventsPath, `${JSON.stringify({ ts: new Date().toISOString(), kind, ...payload })}\n`, 'utf8');
+  try {
+    ensureDirs();
+    fs.appendFileSync(eventsPath, `${JSON.stringify({ ts: new Date().toISOString(), kind, ...payload })}\n`, 'utf8');
+  } catch {
+    // read-only filesystem — event dropped silently
+  }
 }
 
 function seedPersonaRegistry(): PersonaRegistryRecord[] {
