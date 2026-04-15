@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { resolvePersonaPack } from '@/lib/comms/routing';
+import { addDeliveryLog, upsertThread } from '@/lib/comms/store';
 
 export const dynamic = 'force-dynamic';
 
@@ -42,61 +44,80 @@ function escapeXml(text: string): string {
     .replace(/'/g, '&apos;');
 }
 
-function getPersona(to: string): string {
-  const digits = to.replace(/\D/g, '').replace(/^1/, '');
-  // Import inline to avoid edge runtime issues
-  const personaMap: Record<string, string> = {
-    // Storm/Hail
-    '3216410263': 'STORM', '3216410878': 'STORM', '3215033343': 'STORM',
-    '3214352335': 'HAIL',  '3214858237': 'HAIL',  '3215590559': 'HAIL', '3214858333': 'HAIL',
-    // HVAC
-    '8557124246': 'HVAC',  '7866778676': 'HVAC',  '7273878676': 'HVAC',
-    '6237778676': 'HVAC',  '4702878676': 'HVAC',
-    // Claims/Insurance
-    '8556024246': 'CLAIMS','8886115384': 'CLAIMS',
-    '8775709775': 'CLAIMS','8887120268': 'CLAIMS','8886812729': 'CLAIMS',
-    '8557062533': 'CLAIMS','8557712886': 'CLAIMS','8886754245': 'CLAIMS',
-    // Legal
-    '4146766337': 'LAW',   '2623974245': 'LAW',   '4434378657': 'LAW',
-    '2134237865': 'LAW',   '8665062265': 'LAW',   '8886532529': 'LAW',
-    '8889740529': 'LAW',   '8886762825': 'LAW',
-    // Financial
-    '8886780645': 'MONEY', '8883442825': 'MONEY', '8884748738': 'MONEY',
-    '8885052924': 'MONEY', '8447252460': 'MONEY', '8334452924': 'MONEY',
-    '8886430529': 'MONEY', '8886490529': 'MONEY',
-    // Wilkins Media
-    '8448516334': 'WILKINS',
-    // NEED / Universal
-    '8446696333': 'NEED',  '8337604328': 'NEED',
-    '8336024822': 'NEED',  '8335222653': 'NEED',  '7702300635': 'NEED',
-    '9094887663': 'NEED',  '4782424246': 'NEED',  '8887631529': 'NEED',
-    '8888550209': 'NEED',  '5394767663': 'NEED',  '8447561580': 'NEED',
-    '9129106333': 'NEED',  '8449854245': 'NEED',  '8449674245': 'NEED',
-  };
-  return personaMap[digits] ?? 'NEED';
+function generateConversationId(seed: string) {
+  return seed || `voice_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+}
+
+function getTenantId(campaign: string) {
+  return `tenant_${campaign.toLowerCase().replace(/[^a-z0-9]+/g, '_')}`;
 }
 
 export async function POST(request: NextRequest) {
   try {
     const contentType = request.headers.get('content-type') ?? '';
     let to = '';
+    let from = '';
+    let callSessionId = '';
 
     if (contentType.includes('application/json')) {
       const body = await request.json();
       to = body.To ?? body.to ?? '';
+      from = body.From ?? body.from ?? '';
+      callSessionId = body.CallSessionId ?? body.call_session_id ?? body.CallControlId ?? body.call_control_id ?? '';
     } else {
       // application/x-www-form-urlencoded (standard TeXML callback)
       const text = await request.text();
       const params = new URLSearchParams(text);
       to = params.get('To') ?? params.get('to') ?? '';
+      from = params.get('From') ?? params.get('from') ?? '';
+      callSessionId = params.get('CallSessionId') ?? params.get('call_session_id') ?? params.get('CallControlId') ?? params.get('call_control_id') ?? '';
     }
 
     // Also handle query param for redirects
     if (!to) {
       to = request.nextUrl.searchParams.get('To') ?? '';
     }
+    if (!callSessionId) {
+      callSessionId = request.nextUrl.searchParams.get('CallSessionId') ?? '';
+    }
 
-    const persona = getPersona(to);
+    const routing = resolvePersonaPack(to);
+    const conversationId = generateConversationId(callSessionId);
+    const tenantId = getTenantId(routing.campaign);
+    const persona = routing.persona;
+
+    upsertThread({
+      id: conversationId,
+      tenantId,
+      channel: 'voice',
+      status: 'active',
+      persona,
+      packId: routing.packId,
+      numberId: routing.numberConfig?.id,
+      lastInboundAt: new Date().toISOString(),
+      collectedFields: {
+        campaign: routing.campaign,
+        toNumber: routing.digits,
+        ...(from ? { fromNumber: from } : {}),
+      },
+      messages: [],
+    });
+
+    addDeliveryLog({
+      tenantId,
+      conversationId,
+      channel: 'voice',
+      direction: 'inbound',
+      provider: 'telnyx',
+      status: 'initiated',
+      persona,
+      packId: routing.packId,
+      toNumber: to,
+      fromNumber: from,
+      messageSummary: 'Inbound voice call initiated',
+      externalId: callSessionId || undefined,
+    });
+
     const texml = buildTexml(persona, to);
 
     return new NextResponse(texml, {
@@ -126,7 +147,7 @@ export async function POST(request: NextRequest) {
 // Allow GET for quick browser testing
 export async function GET(request: NextRequest) {
   const to = request.nextUrl.searchParams.get('To') ?? '+18448516334';
-  const persona = getPersona(to);
+  const persona = resolvePersonaPack(to).persona;
   const texml = buildTexml(persona, to);
   return new NextResponse(texml, {
     status: 200,

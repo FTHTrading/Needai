@@ -37,6 +37,7 @@ export default function Navigation({ showBackButton = false, backTo = '/', backL
             <a href="/numbers" className={`transition-colors ${pathname === '/numbers' ? 'text-blue-600 font-semibold' : 'text-gray-700 hover:text-blue-600'}`}>Numbers</a>
             <a href="/marketplace" className={`transition-colors ${pathname === '/marketplace' ? 'text-blue-600 font-semibold' : 'text-gray-700 hover:text-blue-600'}`}>Marketplace</a>
             <a href="/dashboard" className={`transition-colors ${pathname === '/dashboard' ? 'text-blue-600 font-semibold' : 'text-gray-700 hover:text-blue-600'}`}>Dashboard</a>
+            <a href="/control-center" className={`transition-colors ${pathname === '/control-center' ? 'text-blue-600 font-semibold' : 'text-gray-700 hover:text-blue-600'}`}>Control Center</a>
             <a href="/states" className={`transition-colors ${pathname === '/states' ? 'text-blue-600 font-semibold' : 'text-gray-700 hover:text-blue-600'}`}>States</a>
             <a href="/ai-marketing-hub" className={`transition-colors ${pathname === '/ai-marketing-hub' ? 'text-blue-600 font-semibold' : 'text-gray-700 hover:text-blue-600'}`}>AI Hub</a>
             <a href="/marketing" className={`transition-colors ${pathname === '/marketing' ? 'text-blue-600 font-semibold' : 'text-gray-700 hover:text-blue-600'}`}>Marketing</a>

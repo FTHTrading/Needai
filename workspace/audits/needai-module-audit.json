@@ -1,0 +1,53 @@
+{
+  "generatedAt": "2026-04-15T19:25:00.000Z",
+  "modules": {
+    "comms": [
+      "store",
+      "provider-health",
+      "runtime",
+      "control-summary"
+    ],
+    "api": [
+      "control summary",
+      "provider health",
+      "delivery logs",
+      "failures",
+      "approvals",
+      "personas",
+      "number packs",
+      "runtime execute",
+      "telnyx webhook voice",
+      "telnyx webhook sms"
+    ],
+    "ui": [
+      "control-center"
+    ]
+  },
+  "counts": {
+    "deliveries": 0,
+    "failures": 0,
+    "approvals": 0,
+    "ledger": 0,
+    "threads": 0
+  },
+  "providerHealth": [
+    {
+      "provider": "telnyx",
+      "configured": true,
+      "status": "degraded",
+      "detail": "Configured, awaiting webhook traffic"
+    },
+    {
+      "provider": "openai",
+      "configured": true,
+      "status": "degraded",
+      "detail": "AI runtime available for structured intake"
+    },
+    {
+      "provider": "weather",
+      "configured": true,
+      "status": "healthy",
+      "detail": "Weather monitor configured"
+    }
+  ]
+}

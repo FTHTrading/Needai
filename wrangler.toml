@@ -1,10 +1,9 @@
-name = "vanity-ai"
+name = "needai-site"
 compatibility_date = "2026-02-03"
 pages_build_output_dir = "out"
 
 [env.production]
-name = "vanity-ai"
-route = "vanity.ai/*"
+name = "needai-site"
 
 [env.preview]
-name = "vanity-ai-preview"
+name = "needai-site-preview"

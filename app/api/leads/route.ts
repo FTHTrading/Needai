@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getLeads, upsertLead } from '@/lib/comms/store';
+import type { LeadRecord } from '@/lib/comms/types';
 
 export const dynamic = 'force-dynamic';
 
@@ -8,8 +10,19 @@ export const dynamic = 'force-dynamic';
  * Handles lead storage, retrieval, and qualification tracking
  */
 
-// In-memory storage (replace with database in production)
-const leads: any[] = [];
+function generateLeadId() {
+  return `lead_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
+}
+
+function getTenantId(lead: Record<string, unknown>) {
+  if (typeof lead.tenantId === 'string' && lead.tenantId) {
+    return lead.tenantId;
+  }
+  if (typeof lead.persona === 'string' && lead.persona) {
+    return `tenant_${lead.persona.toLowerCase()}`;
+  }
+  return 'tenant_need';
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -24,11 +37,12 @@ export async function POST(request: NextRequest) {
     }
 
     // Create lead record
-    const leadRecord = {
-      id: `lead_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+    const leadRecord: LeadRecord = {
+      id: generateLeadId(),
       phoneNumber: lead.phoneNumber,
       callerNumber: lead.callerNumber,
       persona: lead.persona,
+      tenantId: getTenantId(lead),
       status: lead.status || 'new',
       qualification: lead.qualification || 'pending',
       metadata: lead.metadata || {},
@@ -36,7 +50,7 @@ export async function POST(request: NextRequest) {
       updatedAt: new Date().toISOString()
     };
 
-    leads.push(leadRecord);
+    upsertLead(leadRecord);
 
     console.log(`[Leads API] Created lead: ${leadRecord.id}, persona: ${leadRecord.persona}`);
 
@@ -61,7 +75,8 @@ export async function GET(request: NextRequest) {
     const persona = searchParams.get('persona');
     const limit = parseInt(searchParams.get('limit') || '100');
 
-    let filteredLeads = [...leads];
+    const allLeads = getLeads();
+    let filteredLeads = [...allLeads];
 
     // Apply filters
     if (number) {
@@ -89,7 +104,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       success: true,
       count: results.length,
-      total: leads.length,
+      total: allLeads.length,
       leads: results
     });
   } catch (error) {
@@ -112,9 +127,10 @@ export async function PATCH(request: NextRequest) {
       );
     }
 
-    const leadIndex = leads.findIndex(lead => lead.id === id);
+    const leads = getLeads();
+    const existingLead = leads.find(lead => lead.id === id);
 
-    if (leadIndex === -1) {
+    if (!existingLead) {
       return NextResponse.json(
         { error: 'Lead not found' },
         { status: 404 }
@@ -122,17 +138,19 @@ export async function PATCH(request: NextRequest) {
     }
 
     // Update lead
-    leads[leadIndex] = {
-      ...leads[leadIndex],
+    const updatedLead: LeadRecord = {
+      ...existingLead,
       ...updates,
       updatedAt: new Date().toISOString()
     };
+
+    upsertLead(updatedLead);
 
     console.log(`[Leads API] Updated lead: ${id}`);
 
     return NextResponse.json({
       success: true,
-      lead: leads[leadIndex]
+      lead: updatedLead
     });
   } catch (error) {
     console.error('[Leads API] Error updating lead:', error);

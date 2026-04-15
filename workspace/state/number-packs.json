@@ -1,0 +1,118 @@
+[
+  {
+    "id": "xrpl-pack",
+    "persona": "XRPL",
+    "campaign": "XRPL",
+    "active": true,
+    "numberIds": [
+      "xrpl-sovereign"
+    ],
+    "updatedAt": "2026-04-15T04:08:44.808Z"
+  },
+  {
+    "id": "storm-pack",
+    "persona": "STORM",
+    "campaign": "STORM",
+    "active": true,
+    "numberIds": [
+      "storm-ga-primary",
+      "storm-fl-tampa",
+      "storm-fl-miami",
+      "storm-az-phoenix",
+      "storm-ca-la",
+      "storm-md-baltimore",
+      "storm-ga-atlanta-suburbs",
+      "storm-ga-macon",
+      "storm-fl-space-coast",
+      "storm-fl-space-coast-alt",
+      "storm-ga-coastal"
+    ],
+    "updatedAt": "2026-04-15T04:08:44.808Z"
+  },
+  {
+    "id": "hail-pack",
+    "persona": "HAIL",
+    "campaign": "HAIL",
+    "active": true,
+    "numberIds": [
+      "hail-wi-milwaukee-suburbs",
+      "hail-wi-milwaukee",
+      "hail-ca-inland",
+      "hail-ks-wichita"
+    ],
+    "updatedAt": "2026-04-15T04:08:44.808Z"
+  },
+  {
+    "id": "hvac-pack",
+    "persona": "HVAC",
+    "campaign": "HVAC",
+    "active": true,
+    "numberIds": [
+      "hvac-tollfree-primary",
+      "hvac-tollfree-urgent",
+      "hvac-tollfree-general"
+    ],
+    "updatedAt": "2026-04-15T04:08:44.808Z"
+  },
+  {
+    "id": "claims-pack",
+    "persona": "CLAIMS",
+    "campaign": "CLAIMS",
+    "active": true,
+    "numberIds": [
+      "claims-tollfree-primary",
+      "claims-tollfree-overflow-1",
+      "claims-tollfree-overflow-2",
+      "claims-tollfree-file",
+      "claims-tollfree-my-claim"
+    ],
+    "updatedAt": "2026-04-15T04:08:44.808Z"
+  },
+  {
+    "id": "law-pack",
+    "persona": "LAW",
+    "campaign": "LAW",
+    "active": true,
+    "numberIds": [
+      "law-tollfree-ai-primary",
+      "law-tollfree-ai-alt",
+      "law-tollfree-call",
+      "law-tollfree-case",
+      "law-tollfree-help",
+      "law-tollfree-now",
+      "law-tollfree-docs",
+      "law-tollfree-esc"
+    ],
+    "updatedAt": "2026-04-15T04:08:44.808Z"
+  },
+  {
+    "id": "money-pack",
+    "persona": "MONEY",
+    "campaign": "MONEY",
+    "active": true,
+    "numberIds": [
+      "money-tollfree-buck",
+      "money-tollfree-cash",
+      "money-tollfree-bank"
+    ],
+    "updatedAt": "2026-04-15T04:08:44.808Z"
+  },
+  {
+    "id": "need-pack",
+    "persona": "NEED",
+    "campaign": "NEED",
+    "active": true,
+    "numberIds": [
+      "need-tollfree-primary",
+      "need-ga-coastal",
+      "need-tollfree-assist",
+      "need-tollfree-help",
+      "need-tollfree-trust",
+      "need-tollfree-route",
+      "need-tollfree-hail-1",
+      "need-tollfree-hail-2",
+      "wilkins-media-billboard"
+    ],
+    "updatedAt": "2026-04-15T04:08:44.808Z"
+  }
+]

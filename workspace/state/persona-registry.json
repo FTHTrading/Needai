@@ -1,0 +1,106 @@
+[
+  {
+    "id": "persona_storm",
+    "persona": "STORM",
+    "version": "v1",
+    "channelSupport": [
+      "voice",
+      "sms"
+    ],
+    "promptSummary": "personas/STORM.md",
+    "routingIntent": "emergency_routing, property_damage_assessment, contractor_dispatch",
+    "active": true,
+    "updatedAt": "2026-04-15T04:08:44.810Z"
+  },
+  {
+    "id": "persona_hail",
+    "persona": "HAIL",
+    "version": "v1",
+    "channelSupport": [
+      "voice",
+      "sms"
+    ],
+    "promptSummary": "personas/HAIL.md",
+    "routingIntent": "damage_assessment, claims_correlation, contractor_routing",
+    "active": true,
+    "updatedAt": "2026-04-15T04:08:44.810Z"
+  },
+  {
+    "id": "persona_hvac",
+    "persona": "HVAC",
+    "version": "v1",
+    "channelSupport": [
+      "voice",
+      "sms"
+    ],
+    "promptSummary": "personas/HVAC.md",
+    "routingIntent": "service_dispatch, emergency_routing, appointment_scheduling",
+    "active": true,
+    "updatedAt": "2026-04-15T04:08:44.810Z"
+  },
+  {
+    "id": "persona_claims",
+    "persona": "CLAIMS",
+    "version": "v1",
+    "channelSupport": [
+      "voice",
+      "sms"
+    ],
+    "promptSummary": "personas/CLAIMS.md",
+    "routingIntent": "claims_intake, evidence_collection, insurer_routing",
+    "active": true,
+    "updatedAt": "2026-04-15T04:08:44.810Z"
+  },
+  {
+    "id": "persona_law",
+    "persona": "LAW",
+    "version": "v1",
+    "channelSupport": [
+      "voice",
+      "sms"
+    ],
+    "promptSummary": "personas/LAW.md",
+    "routingIntent": "case_screening, jurisdiction_check, attorney_routing",
+    "active": true,
+    "updatedAt": "2026-04-15T04:08:44.810Z"
+  },
+  {
+    "id": "persona_money",
+    "persona": "MONEY",
+    "version": "v1",
+    "channelSupport": [
+      "voice",
+      "sms"
+    ],
+    "promptSummary": "personas/MONEY.md",
+    "routingIntent": "funding_qualification, settlement_verification, payment_routing",
+    "active": true,
+    "updatedAt": "2026-04-15T04:08:44.810Z"
+  },
+  {
+    "id": "persona_need",
+    "persona": "NEED",
+    "version": "v1",
+    "channelSupport": [
+      "voice",
+      "sms"
+    ],
+    "promptSummary": "personas/NEED.md",
+    "routingIntent": "intent_detection, service_routing, multi_persona_dispatch",
+    "active": true,
+    "updatedAt": "2026-04-15T04:08:44.810Z"
+  },
+  {
+    "id": "persona_xrpl",
+    "persona": "XRPL",
+    "version": "v1",
+    "channelSupport": [
+      "voice",
+      "sms"
+    ],
+    "promptSummary": "personas/XRPL.md",
+    "routingIntent": "wallet_operations, attestation, verification, blockchain_queries",
+    "active": true,
+    "updatedAt": "2026-04-15T04:08:44.810Z"
+  }
+]
