@@ -16,8 +16,91 @@ const NUMBERS = [
   { vanity: '414-HAIL', full: '(414) 676-6337', href: 'tel:+14146766337', label: 'Hail Damage', hot: true },
   { vanity: '844-CLAIM', full: '(844) 725-2460', href: 'tel:+18447252460', label: 'Insurance Claims', hot: true },
   { vanity: '888-LAW-AI', full: '(888) 505-2924', href: 'tel:+18885052924', label: 'Tornado / Legal', hot: false },
-  { vanity: '470-STORM', full: '(470) 786-7676', href: 'tel:+14702878676', label: 'Georgia Storm', hot: false },
-  { vanity: '844-NEED-AI', full: '(844) 669-6333', href: 'tel:+18446696333', label: 'Universal', hot: false },
+  { vanity: '470-STORM', full: '(470) 787-6676', href: 'tel:+14702878676', label: 'Georgia Storm', hot: false },
+  { vanity: '844-NEED-AI', full: '(844) 633-6333', href: 'tel:+18446336333', label: 'Universal', hot: false },
+];
+
+interface MktNum { num: string; tel: string; type: 'Local' | 'Toll-Free'; vertical: string; region: string; price: number; features: string[]; }
+interface MktCat { id: string; icon: string; label: string; desc: string; accent: string; numbers: MktNum[]; }
+
+const MARKETPLACE: MktCat[] = [
+  {
+    id: 'storm', icon: '🌦️', label: 'STORM Numbers', desc: 'Storm damage assessment and response hotlines', accent: 'text-orange-400',
+    numbers: [
+      { num: '213-423-7865', tel: '+12134237865', type: 'Local', vertical: 'Storm Damage', region: 'California', price: 199, features: ['Weather Activation', 'AI Intake', 'Local Routing'] },
+      { num: '321-485-8333', tel: '+13214858333', type: 'Local', vertical: 'Storm Damage', region: 'Florida', price: 199, features: ['Weather Activation', 'AI Intake', 'Local Routing'] },
+      { num: '321-559-0559', tel: '+13215590559', type: 'Local', vertical: 'Storm Damage', region: 'Florida', price: 199, features: ['Weather Activation', 'AI Intake', 'Local Routing'] },
+      { num: '470-287-8676', tel: '+14702878676', type: 'Local', vertical: 'Storm Damage', region: 'Georgia', price: 199, features: ['Weather Activation', 'AI Intake', 'Local Routing'] },
+      { num: '727-387-8676', tel: '+17273878676', type: 'Local', vertical: 'Storm Damage', region: 'Florida', price: 199, features: ['Weather Activation', 'AI Intake', 'Local Routing'] },
+      { num: '786-677-8676', tel: '+17866778676', type: 'Local', vertical: 'Storm Damage', region: 'Florida', price: 199, features: ['Weather Activation', 'AI Intake', 'Local Routing'] },
+      { num: '623-777-8676', tel: '+16237778676', type: 'Local', vertical: 'Storm Damage', region: 'Arizona', price: 199, features: ['Weather Activation', 'AI Intake', 'Local Routing'] },
+      { num: '443-437-8657', tel: '+14434378657', type: 'Local', vertical: 'Storm Damage', region: 'Maryland', price: 199, features: ['Weather Activation', 'AI Intake', 'Local Routing'] },
+      { num: '770-230-0635', tel: '+17702300635', type: 'Local', vertical: 'Storm Damage', region: 'Georgia', price: 199, features: ['Weather Activation', 'AI Intake', 'Local Routing'] },
+      { num: '478-242-4246', tel: '+14782424246', type: 'Local', vertical: 'Storm Damage', region: 'Georgia', price: 199, features: ['Weather Activation', 'AI Intake', 'Local Routing'] },
+    ],
+  },
+  {
+    id: 'hail', icon: '🌨️', label: 'HAIL Numbers', desc: 'Hail damage evaluation and claims assistance', accent: 'text-blue-400',
+    numbers: [
+      { num: '262-397-4245', tel: '+12623974245', type: 'Local', vertical: 'Hail Damage', region: 'Wisconsin', price: 199, features: ['Weather Activation', 'AI Intake', 'Local Routing'] },
+      { num: '414-676-6337', tel: '+14146766337', type: 'Local', vertical: 'Hail Damage', region: 'Wisconsin', price: 199, features: ['Weather Activation', 'AI Intake', 'Local Routing'] },
+      { num: '909-488-7663', tel: '+19094887663', type: 'Local', vertical: 'Hail Damage', region: 'California', price: 199, features: ['Weather Activation', 'AI Intake', 'Local Routing'] },
+      { num: '539-476-7663', tel: '+15394767663', type: 'Local', vertical: 'Hail Damage', region: 'Oklahoma', price: 199, features: ['Weather Activation', 'AI Intake', 'Local Routing'] },
+    ],
+  },
+  {
+    id: 'hvac', icon: '🔥', label: 'HVAC Numbers', desc: 'Emergency and scheduled HVAC service coordination', accent: 'text-red-400',
+    numbers: [
+      { num: '833-760-4328', tel: '+18337604328', type: 'Toll-Free', vertical: 'HVAC Services', region: 'National', price: 299, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+      { num: '833-602-4822', tel: '+18336024822', type: 'Toll-Free', vertical: 'HVAC Services', region: 'National', price: 299, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+      { num: '833-522-2653', tel: '+18335222653', type: 'Toll-Free', vertical: 'HVAC Services', region: 'National', price: 299, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+    ],
+  },
+  {
+    id: 'claims', icon: '📋', label: 'CLAIMS Numbers', desc: 'Insurance claims processing and support', accent: 'text-yellow-400',
+    numbers: [
+      { num: '877-570-9775', tel: '+18775709775', type: 'Toll-Free', vertical: 'Claims Processing', region: 'National', price: 349, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+      { num: '844-725-2460', tel: '+18447252460', type: 'Toll-Free', vertical: 'Claims Processing', region: 'National', price: 349, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+      { num: '855-706-2533', tel: '+18557062533', type: 'Toll-Free', vertical: 'Claims Processing', region: 'National', price: 349, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+      { num: '888-712-0268', tel: '+18887120268', type: 'Toll-Free', vertical: 'Claims Processing', region: 'National', price: 349, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+      { num: '888-681-2729', tel: '+18886812729', type: 'Toll-Free', vertical: 'Claims Processing', region: 'National', price: 349, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+    ],
+  },
+  {
+    id: 'law', icon: '⚖️', label: 'LAW Numbers', desc: 'Legal intake and case qualification services', accent: 'text-purple-400',
+    numbers: [
+      { num: '888-505-2924', tel: '+18885052924', type: 'Toll-Free', vertical: 'Legal Services', region: 'National', price: 399, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+      { num: '833-445-2924', tel: '+18334452924', type: 'Toll-Free', vertical: 'Legal Services', region: 'National', price: 399, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+      { num: '888-649-0529', tel: '+18886490529', type: 'Toll-Free', vertical: 'Legal Services', region: 'National', price: 399, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+      { num: '888-653-2529', tel: '+18886532529', type: 'Toll-Free', vertical: 'Legal Services', region: 'National', price: 399, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+      { num: '888-763-1529', tel: '+18887631529', type: 'Toll-Free', vertical: 'Legal Services', region: 'National', price: 399, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+      { num: '888-974-0529', tel: '+18889740529', type: 'Toll-Free', vertical: 'Legal Services', region: 'National', price: 399, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+      { num: '888-643-0529', tel: '+18886430529', type: 'Toll-Free', vertical: 'Legal Services', region: 'National', price: 399, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+      { num: '888-611-5384', tel: '+18886115384', type: 'Toll-Free', vertical: 'Legal Services', region: 'National', price: 399, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+    ],
+  },
+  {
+    id: 'money', icon: '💰', label: 'MONEY Numbers', desc: 'Financial services and banking assistance', accent: 'text-green-400',
+    numbers: [
+      { num: '888-676-2825', tel: '+18886762825', type: 'Toll-Free', vertical: 'Financial Services', region: 'National', price: 299, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+      { num: '888-678-0645', tel: '+18886780645', type: 'Toll-Free', vertical: 'Financial Services', region: 'National', price: 299, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+      { num: '866-265-2924', tel: '+18662652924', type: 'Toll-Free', vertical: 'Financial Services', region: 'National', price: 299, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+    ],
+  },
+  {
+    id: 'need', icon: '🎯', label: 'NEED Numbers', desc: 'Universal intake for multi-vertical routing', accent: 'text-cyan-400',
+    numbers: [
+      { num: '912-910-6333', tel: '+19129106333', type: 'Local', vertical: 'Universal Intake', region: 'Georgia', price: 199, features: ['AI Intake', 'Local Routing'] },
+      { num: '844-633-6333', tel: '+18446336333', type: 'Toll-Free', vertical: 'Universal Intake', region: 'National', price: 299, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+      { num: '888-855-0209', tel: '+18888550209', type: 'Toll-Free', vertical: 'Universal Intake', region: 'National', price: 299, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+      { num: '888-344-2825', tel: '+18883442825', type: 'Toll-Free', vertical: 'Universal Intake', region: 'National', price: 299, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+      { num: '888-474-8738', tel: '+18884748738', type: 'Toll-Free', vertical: 'Universal Intake', region: 'National', price: 299, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+      { num: '844-756-1580', tel: '+18447561580', type: 'Toll-Free', vertical: 'Universal Intake', region: 'National', price: 299, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+      { num: '844-967-4245', tel: '+18449674245', type: 'Toll-Free', vertical: 'Universal Intake', region: 'National', price: 299, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+      { num: '844-985-4245', tel: '+18449854245', type: 'Toll-Free', vertical: 'Universal Intake', region: 'National', price: 299, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+      { num: '844-851-6334', tel: '+18448516334', type: 'Toll-Free', vertical: 'Universal Intake', region: 'National', price: 299, features: ['AI Intake', 'Local Routing', 'Toll-Free'] },
+    ],
+  },
 ];
 
 const EVENT_TYPES = [
@@ -163,6 +246,124 @@ export default function StormHomePage() {
         </div>
       </section>
 
+      {/* MARKETPLACE — hero */}
+      <section id="marketplace" className="border-b border-white/10 bg-white/[0.01]">
+        <div className="max-w-7xl mx-auto px-4 py-20">
+          <div className="text-center mb-6">
+            <div className="text-xs uppercase tracking-widest text-white/30 font-semibold mb-3">AI Phone Number Marketplace</div>
+            <h2 className="text-4xl md:text-5xl font-black mb-4">
+              License programmable AI endpoints<br className="hidden md:block" />
+              <span className="text-white/40"> that activate with weather events.</span>
+            </h2>
+            <p className="text-white/50 text-lg max-w-2xl mx-auto mb-6">Route qualified leads before your competition picks up the phone. 42 canonical numbers across 7 verticals.</p>
+          </div>
+
+          {/* Licensing plans */}
+          <div className="grid md:grid-cols-3 gap-6 mb-16">
+            {[
+              {
+                name: 'Local', price: '$199', period: '/mo', accent: 'border-white/20',
+                features: ['Exclusive number usage', 'Weather-triggered activation', 'AI intake routing', 'Regional coverage'],
+              },
+              {
+                name: 'Toll-Free', price: '$299–$399', period: '/mo', accent: 'border-orange-500/50 bg-orange-950/20',
+                badge: 'Most Popular',
+                features: ['National reach', 'Weather-triggered activation', 'AI intake routing', 'Overflow capacity', 'SMS follow-ups'],
+              },
+              {
+                name: 'Enterprise', price: 'Custom', period: '', accent: 'border-white/10',
+                features: ['White-label solution', 'Custom AI training', 'API integration', 'Dedicated support', 'Custom pricing'],
+              },
+            ].map((plan) => (
+              <div key={plan.name} className={`relative bg-white/5 border rounded-2xl p-8 flex flex-col ${plan.accent}`}>
+                {plan.badge && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs bg-orange-500 text-white px-3 py-1 rounded-full font-bold whitespace-nowrap">{plan.badge}</div>
+                )}
+                <div className="mb-6">
+                  <div className="text-xs uppercase tracking-widest text-white/40 font-semibold mb-2">{plan.name}</div>
+                  <div className="text-3xl font-black">{plan.price}<span className="text-lg font-normal text-white/40">{plan.period}</span></div>
+                </div>
+                <ul className="space-y-2 flex-1 mb-8">
+                  {plan.features.map((f) => (
+                    <li key={f} className="flex items-start gap-2 text-sm text-white/60">
+                      <span className="text-green-400 mt-0.5 flex-shrink-0">✓</span>{f}
+                    </li>
+                  ))}
+                </ul>
+                <a href="mailto:license@needai.unykorn.org" className="block text-center bg-white/10 hover:bg-white/20 text-white font-bold py-3 rounded-xl transition text-sm border border-white/10">
+                  {plan.name === 'Enterprise' ? 'Contact Sales' : 'Get Started'}
+                </a>
+              </div>
+            ))}
+          </div>
+
+          {/* Category nav */}
+          <div className="flex flex-wrap gap-2 mb-10 justify-center">
+            {MARKETPLACE.map((cat) => (
+              <a key={cat.id} href={`#cat-${cat.id}`}
+                className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/5 border border-white/10 hover:border-white/30 text-sm font-semibold transition">
+                <span>{cat.icon}</span><span className={cat.accent}>{cat.id.toUpperCase()}</span>
+                <span className="text-white/30 text-xs">({cat.numbers.length})</span>
+              </a>
+            ))}
+          </div>
+
+          {/* Number grid by category */}
+          <div className="space-y-14">
+            {MARKETPLACE.map((cat) => (
+              <div key={cat.id} id={`cat-${cat.id}`}>
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="text-3xl">{cat.icon}</span>
+                  <div>
+                    <h3 className={`text-xl font-black ${cat.accent}`}>{cat.label}</h3>
+                    <p className="text-sm text-white/40">{cat.desc}</p>
+                  </div>
+                </div>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                  {cat.numbers.map((n) => (
+                    <div key={n.num} className="bg-white/5 border border-white/10 hover:border-white/25 rounded-2xl p-5 flex flex-col transition group">
+                      <div className="flex items-start justify-between mb-3">
+                        <div>
+                          <div className="font-black text-lg text-white group-hover:text-white/90 tracking-wide">{n.num}</div>
+                          <div className="text-xs text-white/30 mt-0.5">{n.region} Region</div>
+                        </div>
+                        <span className={`text-xs font-bold px-2 py-0.5 rounded-full border ${n.type === 'Local' ? 'border-blue-500/40 text-blue-400 bg-blue-950/30' : 'border-orange-500/40 text-orange-400 bg-orange-950/30'}`}>
+                          {n.type}
+                        </span>
+                      </div>
+                      <div className="text-xs text-white/50 font-semibold mb-3">{n.vertical}</div>
+                      <div className="flex flex-wrap gap-1 mb-4">
+                        {n.features.map((f) => (
+                          <span key={f} className="text-xs bg-white/5 border border-white/10 text-white/40 px-2 py-0.5 rounded-full">{f}</span>
+                        ))}
+                      </div>
+                      <div className="mt-auto flex items-center justify-between">
+                        <div className="text-white font-black text-lg">${n.price}<span className="text-xs font-normal text-white/30">/mo</span></div>
+                        <a href={`mailto:license@needai.unykorn.org?subject=License ${n.num}`}
+                          className="text-xs font-bold bg-white text-black px-3 py-1.5 rounded-lg hover:bg-gray-100 transition whitespace-nowrap">
+                          License Now
+                        </a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* MARKETPLACE CTA */}
+      <section className="border-b border-white/10 bg-gradient-to-b from-white/[0.02] to-transparent">
+        <div className="max-w-3xl mx-auto px-4 py-16 text-center">
+          <h2 className="text-3xl md:text-4xl font-black mb-4">Ready to License a Number?</h2>
+          <p className="text-white/50 mb-8">Turn weather events into qualified leads with AI-powered phone numbers.</p>
+          <a href="mailto:license@needai.unykorn.org" className="inline-block bg-white text-black font-black px-10 py-4 rounded-xl text-lg hover:bg-gray-100 transition">
+            Get Started
+          </a>
+        </div>
+      </section>
+
       {/* CAMPAIGN LINKS */}
       <section className="border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 py-16">
@@ -198,7 +399,7 @@ export default function StormHomePage() {
             <a href="tel:+12623974245" className="bg-white text-black font-black px-8 py-4 rounded-xl text-xl hover:bg-gray-100 transition">262-HAIL</a>
             <a href="tel:+18447252460" className="bg-red-600 text-white font-bold px-8 py-4 rounded-xl text-xl hover:bg-red-500 transition">844-CLAIM</a>
             <a href="tel:+18885052924" className="bg-white/10 text-white font-bold px-8 py-4 rounded-xl text-xl hover:bg-white/20 transition border border-white/20">888-LAW-AI</a>
-            <a href="tel:+18446696333" className="bg-white/5 text-white font-bold px-8 py-4 rounded-xl text-xl hover:bg-white/10 transition border border-white/10">844-NEED-AI</a>
+            <a href="tel:+18446336333" className="bg-white/5 text-white font-bold px-8 py-4 rounded-xl text-xl hover:bg-white/10 transition border border-white/10">844-NEED-AI</a>
           </div>
         </div>
       </section>
@@ -213,6 +414,7 @@ export default function StormHomePage() {
             <a href="https://needai.unykorn.org" className="hover:text-white/60 transition">needai.unykorn.org</a>
             <a href="https://hail.unykorn.org" className="hover:text-white/60 transition">hail.unykorn.org</a>
             <Link href="/storm/wisconsin" className="hover:text-white/60 transition">WI Campaign</Link>
+            <a href="#marketplace" className="hover:text-white/60 transition">Marketplace</a>
             <Link href="/blog" className="hover:text-white/60 transition">Blog</Link>
           </div>
         </div>
