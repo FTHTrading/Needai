@@ -244,6 +244,62 @@ export const activationRules: ActivationRule[] = [
     ],
     ai_mode: "universal_intake",
     priority: "emergency"
+  },
+
+  // WISCONSIN APRIL 2026 — ACTIVE STORM EVENT
+  // 17 counties, 2.75" baseball hail, EF3 tornadoes
+  {
+    name: "WI_APRIL_2026_BASEBALL_HAIL",
+    description: "April 2026 Wisconsin event — activate full hail + claims + legal pipeline for baseball-size hail",
+    condition: (signal) =>
+      signal.event_type === "hail" &&
+      signal.hail_size_inches !== undefined &&
+      signal.hail_size_inches >= 2.5 &&
+      signal.region.state === "WI",
+    activate: [
+      "4146766337", // 414-676-HAIL Milwaukee metro
+      "2623974245", // 262-397-HAIL Southeast WI
+      "8447252460", // 844-725-CLAIM national claims
+      "8885052924", // 888-505-LAW legal intake
+      "8446696333"  // 844-669-NEED-AI universal
+    ],
+    ai_mode: "hail_property_extreme",
+    priority: "emergency"
+  },
+
+  {
+    name: "WI_TORNADO_EF2_EF3",
+    description: "Wisconsin EF2/EF3 tornado — activate legal and structural damage pipeline",
+    condition: (signal) =>
+      signal.event_type === "tornado" &&
+      signal.region.state === "WI" &&
+      (signal.advisory === "emergency" || (signal.severity !== undefined && signal.severity >= 80)),
+    activate: [
+      "8885052924", // 888-505-LAW legal intake (tornado = structural = legal)
+      "8886754245", // 888-675-NEED national overflow
+      "8447252460", // 844-725-CLAIM insurance claims
+      "2623974245"  // 262-397-HAIL WI local
+    ],
+    ai_mode: "storm_structural_legal",
+    priority: "emergency"
+  },
+
+  {
+    name: "WI_MULTI_COUNTY_STORM",
+    description: "Wisconsin multi-county storm event — activate all WI numbers and national overflow",
+    condition: (signal) =>
+      signal.event_type === "storm" &&
+      signal.region.state === "WI" &&
+      signal.advisory === "emergency",
+    activate: [
+      "4146766337", // 414-676-HAIL Milwaukee
+      "2623974245", // 262-397-HAIL SE Wisconsin
+      "8447252460", // 844-725-CLAIM claims
+      "8885052924", // 888-505-LAW legal
+      "8446696333"  // 844-669-NEED universal
+    ],
+    ai_mode: "storm_property",
+    priority: "emergency"
   }
 ];
 
