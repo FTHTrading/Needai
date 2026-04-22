@@ -1,7 +1,7 @@
 // Weather-Trigger Engine Types
 // This defines the normalized inputs and outputs for the weather-triggered activation system
 
-export type WeatherEventType = "hail" | "storm" | "hurricane" | "wind" | "winter" | "flood" | "heat_wave" | "cold_snap";
+export type WeatherEventType = "hail" | "storm" | "hurricane" | "wind" | "winter" | "flood" | "heat_wave" | "cold_snap" | "tornado";
 
 export type AdvisoryLevel = "watch" | "warning" | "emergency";
 

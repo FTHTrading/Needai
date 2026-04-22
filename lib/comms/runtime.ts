@@ -21,7 +21,7 @@ function extractJsonObject(text: string): string | null {
 }
 
 function computeConfidence(summary: string, callbackNumber?: string, contactName?: string, modelHint?: number): number {
-  let score = Number.isFinite(modelHint) ? modelHint : 0.72;
+  let score: number = Number.isFinite(modelHint) ? (modelHint as number) : 0.72;
   if (contactName) score += 0.08;
   if (callbackNumber) score += 0.08;
   if (summary.length < 30) score -= 0.15;
@@ -29,7 +29,7 @@ function computeConfidence(summary: string, callbackNumber?: string, contactName
   return Math.max(0, Math.min(1, score));
 }
 
-async function callStructuredAI(input: RuntimeExecuteInput) {
+async function callStructuredAI(input: RuntimeExecuteInput): Promise<{ ok: false; error: string } | { ok: true; content: string; usage: { prompt_tokens: number; completion_tokens: number; total_tokens: number }; model: string }> {
   if (!process.env.OPENAI_API_KEY) {
     return {
       ok: false,
@@ -88,61 +88,8 @@ export async function executeRuntime(input: RuntimeExecuteInput): Promise<Runtim
       conversationId: input.conversationId,
       channel: input.channel,
       provider: 'openai',
-      reason: 'runtime_execute_failed',
-      detail: ai.error ?? 'Unknown runtime execution error',
-    });
-    writeNeedaiWorkspaceReports();
-    return {
-      ok: false,
-      message: input.channel === 'voice'
-        ? 'I am having a brief connection issue. Please share your name and callback number and our team will follow up.'
-        : 'We hit a temporary issue. Please send your name and callback number and a specialist will follow up.',
-      confidence: 0.2,
-      approvalRequired: false,
-      escalate: true,
-      structured: {
-        intent: 'fallback',
-        summary: 'AI runtime failed',
-        nextAction: 'manual_follow_up',
-      },
-    };
-  }
-
-  const jsonText = extractJsonObject(ai.content);
-  if (!jsonText) {
-    addFailure({
-      tenantId: input.tenantId,
-      conversationId: input.conversationId,
-      channel: input.channel,
-      provider: 'openai',
-      reason: 'runtime_parse_failed',
-      detail: ai.content.slice(0, 240),
-    });
-    return {
-      ok: false,
-      message: 'I want to make sure I get this right. Please share your name and best callback number.',
-      confidence: 0.25,
-      approvalRequired: false,
-      escalate: true,
-      structured: {
-        intent: 'parse_failure',
-        summary: 'Model output was not valid JSON',
-        nextAction: 'manual_follow_up',
-      },
-    };
-  }
-
-  let parsed: any;
-  try {
-    parsed = JSON.parse(jsonText);
-  } catch {
-    addFailure({
-      tenantId: input.tenantId,
-      conversationId: input.conversationId,
-      channel: input.channel,
-      provider: 'openai',
-      reason: 'runtime_json_invalid',
-      detail: jsonText.slice(0, 240),
+      reason: 'ai_call_failed',
+      detail: ai.error,
     });
     return {
       ok: false,
@@ -158,13 +105,24 @@ export async function executeRuntime(input: RuntimeExecuteInput): Promise<Runtim
     };
   }
 
+  const rawText = extractJsonObject(ai.content);
+  let parsed: Record<string, unknown> = {};
+  if (rawText) {
+    try {
+      parsed = JSON.parse(rawText);
+    } catch {
+      // leave parsed empty — will degrade gracefully below
+    }
+  }
+
   const callbackNumber = parsed.callbackNumber ? normalizeNumber(String(parsed.callbackNumber)) : undefined;
+  const contactName = parsed.contactName ? String(parsed.contactName) : undefined;
   const summary = String(parsed.summary ?? input.callerInput);
   const modelHint = Number(parsed.confidenceHint);
   const confidence = computeConfidence(
     summary,
     callbackNumber,
-    parsed.contactName,
+    contactName,
     Number.isFinite(modelHint) ? modelHint : undefined,
   );
   const approvalRequired = Boolean(parsed.approvalRequired) || SENSITIVE_TERMS.some((term) => input.callerInput.toLowerCase().includes(term));
@@ -210,7 +168,7 @@ export async function executeRuntime(input: RuntimeExecuteInput): Promise<Runtim
     lastInboundAt: new Date().toISOString(),
     lastOutboundAt: new Date().toISOString(),
     collectedFields: {
-      ...(parsed.contactName ? { contactName: String(parsed.contactName) } : {}),
+      ...(contactName ? { contactName } : {}),
       ...(callbackNumber ? { callbackNumber } : {}),
       summary,
     },
@@ -232,7 +190,7 @@ export async function executeRuntime(input: RuntimeExecuteInput): Promise<Runtim
     messageSummary: String(parsed.message ?? '').slice(0, 160),
   });
 
-  if (callbackNumber || parsed.contactName) {
+  if (callbackNumber || contactName) {
     const lead: LeadRecord = {
       id: generateId('lead'),
       phoneNumber: callbackNumber ?? input.fromNumber ?? input.toNumber,
@@ -243,7 +201,7 @@ export async function executeRuntime(input: RuntimeExecuteInput): Promise<Runtim
       qualification: confidence >= 0.85 ? 'qualified' : confidence >= 0.65 ? 'review' : 'pending',
       metadata: {
         summary,
-        contactName: parsed.contactName,
+        contactName,
         packId: input.packId,
       },
       createdAt: new Date().toISOString(),
@@ -287,7 +245,7 @@ export async function executeRuntime(input: RuntimeExecuteInput): Promise<Runtim
     escalate,
     structured: {
       intent: String(parsed.intent ?? 'general_intake'),
-      contactName: parsed.contactName ? String(parsed.contactName) : undefined,
+      contactName,
       callbackNumber,
       summary,
       nextAction: String(parsed.nextAction ?? (escalate ? 'manual_review' : 'continue_conversation')),
